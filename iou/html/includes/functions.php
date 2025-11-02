@@ -884,7 +884,7 @@ function page_footer() {
  */
 function page_header($title) {
 ?>
-<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<!DOCTYPE html>
 <html xmlns='http://www.w3.org/1999/xhtml' lang='en'>
 <head>
 	<title>IOU Web Interface - <?php print $title ?></title>
@@ -899,7 +899,7 @@ function page_header($title) {
 		_editor_icons = 'Classic'; // If you want to use a different iconset, add the name (of the folder, under the `iconsets` folder) here
 	</script>
 	<script type='text/javascript' src='<?php print BASE_WWW ?>/xinha/XinhaCore.js'></script>
-	<script type='text/javascript' src='<?php print BASE_WWW ?>/xinha/XinhaConfig.js'></script>
+	<script type='text/javascript' src='<?php print BASE_WWW ?>/xinha/XinhaLoader.js'></script>
 	<script type='text/javascript' src='<?php print BASE_WWW ?>/js/jquery-1.8.2.min.js'></script>
 	<script type='text/javascript' src='<?php print BASE_WWW ?>/js/jquery-ui-1.8.24.custom.min.js'></script>
 	<script type='text/javascript' src='<?php print BASE_WWW ?>/js/jquery.contextmenu.js'></script>

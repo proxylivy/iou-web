@@ -1,3 +1,4 @@
+AddOutputFilterByType DEFLATE text/html text/plain text/xml text/javascript application/javascript text/css
 # PHP.ini
 php_value date.timezone Europe/Rome
 php_value post_max_size 200M

@@ -30,8 +30,8 @@
 */
 
 // Strip slashes if MQGPC is on
-set_magic_quotes_runtime(0);
-if(get_magic_quotes_gpc())
+if(function_exists('set_magic_quotes_runtime')) @set_magic_quotes_runtime(0);
+if(function_exists('get_magic_quotes_gpc') && @get_magic_quotes_gpc())
 {
   $to_clean = array(&$_GET, &$_POST, &$_REQUEST, &$_COOKIE);
   while(count($to_clean))
@@ -52,11 +52,17 @@ if(get_magic_quotes_gpc())
   }
 }
 
+if(isset($_POST['encoded_data']))
+{
+  $D = json_decode(str_rot13($_POST['encoded_data']));
+  foreach($D as $k => $v) { $_POST[$k]=$v; if(!isset($_REQUEST[$k])) $_REQUEST[$k] = $v; }
+}
+
 function size_to_bytes($s)
 {
   if(preg_match('/([0-9\.])+([a-zA-Z]+)/', $s, $M))
   {
-    switch(strtolower($M))
+    switch(strtolower($M[2]))
     {      
       case 'm':
         return floor(floatval($M[1]) * 1024 * 1024);
@@ -74,7 +80,19 @@ function size_to_bytes($s)
   return intval($s); // Bytes
 }
 
+define('I_KNOW_ABOUT_SUHOSIN', TRUE); // /contrib/xinha-php.js does it's best to avoid this problem for us
 require_once('config.php');
+
+// Ensure thumbnail path is OK
+if(!isset($IMConfig['files_dir']) && !isset($IMConfig['images_dir']))
+{
+  unset($IMConfig['thumbs_dir']);
+  unset($IMConfig['thumbs_url']);
+}
+else
+{ 
+  if(!file_exists($IMConfig['thumbs_dir'])) @mkdir($IMConfig['thumbs_dir']);
+}
 
 switch ( @$_REQUEST[ "__function" ] )
 {
@@ -86,44 +104,73 @@ switch ( @$_REQUEST[ "__function" ] )
     break;
 
   case 'image-manager':
-    include('mootools-filemanager/Backend/FileManager.php');
-
-    $browser = new FileManager(array(
-      'directory'     => $IMConfig['images_dir'],
-      'baseURL'       => $IMConfig['images_url'],
+    if(!@$IMConfig['images_dir'])
+    {
+      // Session time out
+      echo '{"status" : 0, "error": "No images_dir, most likely your session has timed out, or the file upload was too large for this server to handle, try refreshing your browser, or uploading a smaller file if it still does not work.", "data": ' . json_encode($_REQUEST).'}';exit;
+    }
+    
+    // include('mootools-filemanager/Assets/Connector/FileManager.php');
+    include('XinhaFileManager.php');
+    
+    $browser = new XinhaFileManager(array(
+      'images_dir'    => $IMConfig['images_dir'],
+      'images_url'    => $IMConfig['images_url'],
+      
+      'thumbs_dir'    => $IMConfig['thumbs_dir'],
+      'thumbs_url'    => $IMConfig['thumbs_url'],
       
       'assetBasePath' => $IMConfig['base_url'] .'/mootools-filemanager/Assets',
       
-      'upload'        => $IMConfig['allow_images_upload'],
-      'maxUploadSize' => size_to_bytes($IMConfig['max_images_upload_size']),
+      'upload'        => $IMConfig['images_allow_upload'],
+      'destroy'       => $IMConfig['images_allow_delete'],      
+      'create'        => $IMConfig['images_allow_create_dir'],
+      'move'          => $IMConfig['images_allow_move'],
+      'download'      => $IMConfig['images_allow_download'],
       
-      'suggestedMaxImageDimension' => $IMConfig['suggested_images_image_dimension'],
-            
-      'destroy'       => $IMConfig['allow_images_delete'],
-      'filter'        => 'image/',
-            
+      
+      'maxUploadSize' => size_to_bytes($IMConfig['images_max_upload_size']),      
+      'suggestedMaxImageDimension' => $IMConfig['images_suggested_image_dimension'],
+      'thumbnailsMustGoThroughBackend' => FALSE,          
+      'filter'        => 'image/',          
+      
+      'thumbBigSize'  => 150,
     ));
 
     $browser->fireEvent(!empty($_REQUEST['event']) ? $_REQUEST['event'] : null);
     break;
   
   case 'file-manager':
-    include('mootools-filemanager/Backend/FileManager.php');
-
-    $browser = new FileManager(array(
-      'directory'     => $IMConfig['files_dir'],
-      'baseURL'       => $IMConfig['files_url'],
+    if(!@$IMConfig['files_dir'])
+    {
+      // Session time out
+      echo '{"status" : 0, "error": "No files_dir, most likely your session has timed out."}';exit;
+    }
+    
+    include('XinhaFileManager.php');
+    
+    $browser = new XinhaFileManager(array(
+      'files_dir'     => $IMConfig['files_dir'],
+      'files_url'     => $IMConfig['files_url'],
+      
+      'thumbs_dir'    => $IMConfig['thumbs_dir'],
+      'thumbs_url'    => $IMConfig['thumbs_url'],
       
       'assetBasePath' => $IMConfig['base_url'] .'/mootools-filemanager/Assets',
       
-      'upload'        => $IMConfig['allow_files_upload'],
-      'maxUploadSize' => size_to_bytes($IMConfig['max_files_upload_size']),
+      'upload'        => $IMConfig['files_allow_upload'],
+      'destroy'       => $IMConfig['files_allow_delete'],
+      'create'        => $IMConfig['files_allow_create_dir'],
+      'move'          => $IMConfig['files_allow_move'],
+      'download'      => $IMConfig['files_allow_download'],
       
-      'suggestedMaxImageDimension' => $IMConfig['suggested_files_image_dimension'],
-            
-      'destroy'       => $IMConfig['allow_files_delete'],
+      
+      'maxUploadSize' => size_to_bytes($IMConfig['files_max_upload_size']),      
+      'suggestedMaxImageDimension' => $IMConfig['files_suggested_image_dimension'],
+      'thumbnailsMustGoThroughBackend' => FALSE,      
      // 'filter'        => $IMConfig['files_filter'],
-            
+      'thumbBigSize'  => 150,
+      'useGetID3IfAvailable' => false,
     ));
 
     $browser->fireEvent(!empty($_REQUEST['event']) ? $_REQUEST['event'] : null);

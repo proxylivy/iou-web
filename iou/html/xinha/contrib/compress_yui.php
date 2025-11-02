@@ -1,4 +1,4 @@
-<?
+<?php
 // This is script that uses the YUI compressor (http://www.julienlecomte.net/blog/2007/08/11/)
 // It yields gradually better results than the dojo comressor, but it produces unreadable code
 //die("Run this script to batch-compress the current Xinha snapshot. To run the script, open the file and comment out the die() command");
@@ -92,7 +92,7 @@ foreach ($return as $file)
 	file_put_contents($file."_uncompr${ext}", preg_replace('/(\/\/[^\n]*)?(?![*])\\\[\n]/','',file_get_contents($file)));
 
 	passthru("echo \"".(preg_match('/XinhaCore.js$/',$file) ? $file_prefix.$core_prefix : $prefix)."\" > $file && java -jar {$xinha_root}/contrib/yuicompressor-2.4.2.jar  --charset UTF-8 ${file}_uncompr${ext} >> $file 2>&1");
-	if (preg_match('/\d+:\d+:syntax error/',file_get_contents($file)) || preg_match('/sh: java: command not found/', file_get_contents($file)))
+	if (preg_match('/syntax error/',file_get_contents($file)) || preg_match('/sh: java: command not found/', file_get_contents($file)))
 	{
 		unlink($file);
 		rename($file."_uncompr${ext}",$file);

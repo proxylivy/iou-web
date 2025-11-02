@@ -1,42 +1,48 @@
 // I18N constants
-
 // LANG: "lv", ENCODING: UTF-8
-// Author: Mihai Bazon, http://dynarch.com/mishoo
-// Translated by: Janis Klavins, <janis.klavins@devia.lv>
-
+//
+// IMPORTANT NOTICE FOR TRANSLATORS
+// ============================================================================
+//
+// Please be sure you read the README_TRANSLATORS.TXT in the Xinha Root 
+// Directory.  Unless you are making a new plugin or module it is unlikely 
+// that you want to be editing this file directly.
+//
 {
-  "Bold": "Trekniem burtiem",
-  "Italic": "KursÓv‚",
-  "Underline": "PasvÓtrots",
-  "Strikethrough": "P‚rsvÓtrots",
-  "Subscript": "Novietot zem rindas",
-  "Superscript": "Novietot virs rindas",
-  "Justify Left": "IzlÓdzin‚t pa kreisi",
-  "Justify Center": "IzlÓdzin‚t centr‚",
-  "Justify Right": "IzlÓdzin‚t pa labi",
-  "Justify Full": "IzlÓdzin‚t pa visu lapu",
-  "Ordered List": "NumurÁts saraksts",
-  "Bulleted List": "Saraksts",
-  "Decrease Indent": "Samazin‚t atk‚pi",
-  "Increase Indent": "Palielin‚t atk‚pi",
-  "Font Color": "Burtu kr‚sa",
-  "Background Color": "Fona kr‚sa",
-  "Horizontal Rule": "Horizont‚la atdalÓt‚jsvÓtra",
-  "Insert Web Link": "Ievietot hipersaiti",
-  "Insert/Modify Image": "Ievietot attÁlu",
-  "Insert Table": "Ievietot tabulu",
-  "Toggle HTML Source": "SkatÓt HTML kodu",
-  "Enlarge Editor": "Palielin‚t RediÏÁt‚ju",
-  "About this editor": "Par o rediÏÁt‚ju",
-  "Help using editor": "RediÏÁt‚ja palÓgs",
-  "Current style": "PatreizÁjais stils",
-  "Undoes your last action": "Atcelt pÁdÁjo darbÓbu",
-  "Redoes your last action": "Atk‚rtot pÁdÁjo darbÓbu",
-  "Cut selection": "Izgriezt iezÓmÁto",
-  "Copy selection": "KopÁt iezÓmÁto",
-  "Paste from clipboard": "Ievietot iezÓmÁto",
-  "OK": "Labi",
-  "Cancel": "Atcelt",
-  "Path": "CeÔ",
-  "You are in TEXT MODE.  Use the [<>] button to switch back to WYSIWYG.": "J˚s patlaban darbojaties TEKSTA REﬁŒM¬. Lai p‚rietu atpakaÔ uz GRAFISKO REﬁŒMU (WYSIWIG), lietojiet [<>] pogu."
-}
+    "About this editor": "Par √∞o redi√¨√ßt√¢ju",
+    "Background Color": "Fona kr√¢sa",
+    "Bold": "Trekniem burtiem",
+    "Bulleted List": "Saraksts",
+    "Copy selection": "Kop√ßt iez√Æm√ßto",
+    "Current style": "Patreiz√ßjais stils",
+    "Cut selection": "Izgriezt iez√Æm√ßto",
+    "Decrease Indent": "Samazin√¢t atk√¢pi",
+    "Font Color": "Burtu kr√¢sa",
+    "Help using editor": "Redi√¨√ßt√¢ja pal√Ægs",
+    "Horizontal Rule": "Horizont√¢la atdal√Æt√¢jsv√Ætra",
+    "Increase Indent": "Palielin√¢t atk√¢pi",
+    "Insert Table": "Ievietot tabulu",
+    "Insert Web Link": "Ievietot hipersaiti",
+    "Insert/Modify Image": "Ievietot att√ßlu",
+    "Italic": "Kurs√Æv√¢",
+    "Justify Center": "Izl√Ædzin√¢t centr√¢",
+    "Justify Full": "Izl√Ædzin√¢t pa visu lapu",
+    "Justify Left": "Izl√Ædzin√¢t pa kreisi",
+    "Justify Right": "Izl√Ædzin√¢t pa labi",
+    "Ordered List": "Numur√ßts saraksts",
+    "Paste from clipboard": "Ievietot iez√Æm√ßto",
+    "Path": "Ce√Ø√∞",
+    "Redoes your last action": "Atk√¢rtot p√ßd√ßjo darb√Æbu",
+    "Strikethrough": "P√¢rsv√Ætrots",
+    "Subscript": "Novietot zem rindas",
+    "Superscript": "Novietot virs rindas",
+    "Toggle HTML Source": "Skat√Æt HTML kodu",
+    "Underline": "Pasv√Ætrots",
+    "Undoes your last action": "Atcelt p√ßd√ßjo darb√Æbu",
+    "You are in TEXT MODE.  Use the [<>] button to switch back to WYSIWYG.": "J√ªs patlaban darbojaties TEKSTA RE√û√éM√Ç. Lai p√¢rietu atpaka√Ø uz GRAFISKO RE√û√éMU (WYSIWIG), lietojiet [<>] pogu.",
+    "__OBSOLETE__": {
+        "Cancel": "Atcelt",
+        "Enlarge Editor": "Palielin√¢t Redi√¨√ßt√¢ju",
+        "OK": "Labi"
+    }
+};

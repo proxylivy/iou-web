@@ -30,7 +30,7 @@ if (!defined('BASE_DIR')) define('BASE_DIR', '/opt/iou');
 if (!defined('BASE_WWW')) define('BASE_WWW', '');			// Change if you need custom url/port: 'http://192.168.72.130:81/iou'
 if (!defined('BASE_PORT')) define('BASE_PORT', '2000');			// Change if you need different TELNET port.
 if (!defined('BCK_RETENTION')) define('BCK_RETENTION', '10');
-if (!defined('CHECK_UPDATE')) define('CHECK_UPDATE', true);
+if (!defined('CHECK_UPDATE')) define('CHECK_UPDATE', false);
 if (!defined('PROXY')) define('PROXY', '');				// Change to IP:port (i.e. '192.168.0.1:3128')
 if (!defined('UPDATE_INTERVAL')) define('UPDATE_INTERVAL', '2');	// Seconds between check device status
 
