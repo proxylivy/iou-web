@@ -214,12 +214,14 @@ if (is_admin()) {
 					header("Expires: Sat, 26 Jul 1997 05:00:00 GMT");	// Date in the past
 					header("Location: ".BASE_WWW."/manage.php?action=lab_edit#devices");
 					exit();
-				} else {
-					header('Cache-Control: no-cache, must-revalidate');	// HTTP/1.1
-					header('Expires: Sat, 26 Jul 1997 05:00:00 GMT');	// Date in the past
-					header('HTTP/1.1 403 Forbidden');					// Forbidden
-					exit();
 				}
+                header('Cache-Control: no-cache, must-revalidate');
+                // HTTP/1.1
+                header('Expires: Sat, 26 Jul 1997 05:00:00 GMT');
+                // Date in the past
+                header('HTTP/1.1 403 Forbidden');
+                // Forbidden
+                exit();
 				break;
 			} else {
 				// Fill the form
@@ -333,15 +335,17 @@ if (is_admin()) {
 					header("Expires: Sat, 26 Jul 1997 05:00:00 GMT");       // Date in the past
 					header("Location: ".BASE_WWW."/laboratories.php");
 					exit();
-				} else {
-					header('Cache-Control: no-cache, must-revalidate');     // HTTP/1.1
-					header('Expires: Sat, 26 Jul 1997 05:00:00 GMT');       // Date in the past
-					header('HTTP/1.1 403 Forbidden');                       // Forbidden
-					exit();
 				}
-			} else {
-				// Fill the form
-				if(isset($_GET['img_id']) && is_numeric($_GET['img_id'])) {
+                header('Cache-Control: no-cache, must-revalidate');
+                // HTTP/1.1
+                header('Expires: Sat, 26 Jul 1997 05:00:00 GMT');
+                // Date in the past
+                header('HTTP/1.1 403 Forbidden');
+                // Forbidden
+                exit();
+			}
+            // Fill the form
+            if(isset($_GET['img_id']) && is_numeric($_GET['img_id'])) {
 					$image = new Image(true, $_GET['img_id'], '', '');
 					page_header('Manage');
 ?>
@@ -411,7 +415,6 @@ if (is_admin()) {
 					header('HTTP/1.1 403 Forbidden');					// Forbidden
 					exit();
 				}
-			}
 			break;
 /*************************************************************************
  * Edit a lab                                                            *
@@ -544,20 +547,20 @@ if (is_admin()) {
 						//header("Location: ".BASE_WWW."/manage.php?action=lab_edit&lab_id=".$lab_id."#devices");
 						header("Location: ".BASE_WWW."/manage.php?action=lab_edit#devices");
 						exit();
-					} else {
-						// Lab modified, next step is show lab or edit devices position
-						header("Cache-Control: no-cache, must-revalidate"); // HTTP/1.1
-						header("Expires: Sat, 26 Jul 1997 05:00:00 GMT"); // Date in the past
-						//header("Location: ".BASE_WWW."/laboratories.php?action=open&lab_id=".$lab_id);
-						header("Location: ".BASE_WWW."/laboratories.php?action=open");
-						exit();
 					}
-				} else {
-					// Error TODO
-					$_SESSION['current_error'] = 'Input validation error';
-					header("Location: ".BASE_WWW."/error.php");
-					exit();
+                    // Lab modified, next step is show lab or edit devices position
+                    header("Cache-Control: no-cache, must-revalidate");
+                    // HTTP/1.1
+                    header("Expires: Sat, 26 Jul 1997 05:00:00 GMT");
+                    // Date in the past
+                    //header("Location: ".BASE_WWW."/laboratories.php?action=open&lab_id=".$lab_id);
+                    header("Location: ".BASE_WWW."/laboratories.php?action=open");
+                    exit();
 				}
+                // Error TODO
+                $_SESSION['current_error'] = 'Input validation error';
+                header("Location: ".BASE_WWW."/error.php");
+                exit();
 				break;
 			} else {
 				// Fill the form
@@ -848,12 +851,14 @@ if (is_admin()) {
 					header("Expires: Sat, 26 Jul 1997 05:00:00 GMT");	// Date in the past
 					header("Location: ".BASE_WWW."/laboratories.php");
 					exit();
-				} else {
-					header('Cache-Control: no-cache, must-revalidate');	// HTTP/1.1
-					header('Expires: Sat, 26 Jul 1997 05:00:00 GMT');	// Date in the past
-					header('HTTP/1.1 403 Forbidden');					// Forbidden
-					exit();
 				}
+                header('Cache-Control: no-cache, must-revalidate');
+                // HTTP/1.1
+                header('Expires: Sat, 26 Jul 1997 05:00:00 GMT');
+                // Date in the past
+                header('HTTP/1.1 403 Forbidden');
+                // Forbidden
+                exit();
 				break;
 			} else {
 				// Fill the form

@@ -67,10 +67,9 @@ class Folder {
 	function getPath() {
 		if ($this -> id == 0) {
 			return '/';
-		} else {
-			$parent_folder = New Folder(true, $this -> parent_id, '', '');
-			return $parent_folder -> path.$this -> name.'/';
 		}
+        $parent_folder = New Folder(true, $this -> parent_id, '', '');
+        return $parent_folder -> path.$this -> name.'/';
 	}
 }
 ?>

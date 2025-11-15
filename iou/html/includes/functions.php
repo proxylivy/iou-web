@@ -85,10 +85,9 @@ function database_backup() {
 	if (!file_exists(DATABASE."-$today")) {
 		if (copy(DATABASE, DATABASE."-$today")) {
 			return true;
-		} else {
-			error_log('DB: failed to backup the database.');
-			return false;
 		}
+        error_log('DB: failed to backup the database.');
+        return false;
 	}
 	
 	// Count how many backup files
@@ -106,10 +105,9 @@ function database_backup() {
 	while ($counter >= BCK_RETENTION) {
 		if (unlink(BASE_DIR."/data/$files[$counter]")) {
 			return true;
-		} else {
-			error_log('DB: failed to delete old backup file '.BASE_DIR.'/data/'.$files[$counter]);
-			return false;
 		}
+        error_log('DB: failed to delete old backup file '.BASE_DIR.'/data/'.$files[$counter]);
+        return false;
 		$counter--;
 	}
 }
@@ -563,10 +561,9 @@ function getLastConfigId() {
 		$result = $statement -> fetch();
 		if (is_numeric($result['last'])) {
 			return $result['last'];
-		} else {
-			// No config found, return 0
-			return 0;
 		}
+        // No config found, return 0
+        return 0;
 		return $result['last'];
 	} catch (PDOException $e) {
 		error_log('DB: cannot select last cfg_id with error "'.$e->getMessage().'" (query was "'.$query.'".');
@@ -588,10 +585,9 @@ function getLastImageId() {
 		$result = $statement -> fetch();
 		if (is_numeric($result['last'])) {
 			return $result['last'];
-		} else {
-			// No image found, return 0
-			return 0;
 		}
+        // No image found, return 0
+        return 0;
 	} catch (PDOException $e) {
 		error_log('DB: cannot select last img_id with error "'.$e->getMessage().'" (query was "'.$query.'".');
 		return false;
@@ -612,10 +608,9 @@ function getLastLabId() {
 		$result = $statement -> fetch();
 		if (is_numeric($result['last'])) {
 			return $result['last'];
-		} else {
-			// No lab found, return 0
-			return 0;
 		}
+        // No lab found, return 0
+        return 0;
 	} catch (PDOException $e) {
 		error_log('DB: cannot select last lab_id with error "'.$e->getMessage().'" (query was "'.$query.'".');
 		return false;

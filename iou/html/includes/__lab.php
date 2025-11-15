@@ -83,9 +83,8 @@ class Lab {
 			exec($command, $output, $pid);
 			if ($pid == 0) {
 				return true;
-			} else {
-				return false;
 			}
+            return false;
 		} catch (Exception $e) {
 			error_log('EXEC: failed to exec "'.$command.'".');
 			return false;
@@ -277,16 +276,15 @@ class Lab {
 	 public function  snifferStart() {
 	 	if ($this -> isSnifferRunning()) {
 			return true;
-		} else {
-			$command = 'nohup sudo '.BASE_BIN.'/iousniff -n /tmp/iou/lab_'.$this -> id.'/NETMAP -s /opt/iou/data/Sniffer/ >> '.BASE_DIR.'/data/Logs/exec.txt 2>&1 &';
-			try {
+		}
+         $command = 'nohup sudo '.BASE_BIN.'/iousniff -n /tmp/iou/lab_'.$this -> id.'/NETMAP -s /opt/iou/data/Sniffer/ >> '.BASE_DIR.'/data/Logs/exec.txt 2>&1 &';
+         try {
 				exec($command, $output, $pid);
 				return $this -> isSnifferRunning();
 			} catch (Exception $e) {
 				error_log('EXEC: failed to exec "'.$command.'".');
 				return false;
 			}
-		}
 	 }
     /**
      * Stop the sniffer
@@ -296,16 +294,15 @@ class Lab {
 	 public function  snifferStop() {
 	 	if (!$this -> isSnifferRunning()) {
 			return true;
-		} else {
-			$command = 'sudo pkill iousniff';
-			try {
+		}
+         $command = 'sudo pkill iousniff';
+         try {
 				exec($command, $output, $pid);
 				return !$this -> isSnifferRunning();
 			} catch (Exception $e) {
 				error_log('EXEC: failed to exec "'.$command.'".');
 				return false;
 			}
-		}
 	 }
 }
 ?>
