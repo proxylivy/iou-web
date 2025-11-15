@@ -112,10 +112,10 @@ if (is_admin()) {
 				// Form completed, updating the DB
 				if(isset($_POST['img_name']) && isset($_FILES['img_file']['tmp_name']) &&
 					isset($_FILES['img_file']['type']) && $_FILES['img_file']['type'] = 'image/png') {
-				
+
 					$img_name = $_POST['img_name'];
 					$img_id = $_GET['img_id'];
-					$img_info = $_POST['img_info'] ? $_POST['img_info'] : '';
+					$img_info = $_POST['img_info'] ?: '';
 
 					$hndl = fopen($_FILES['img_file']['tmp_name'], 'r'); 
 					$imgdata = ''; 
@@ -324,8 +324,8 @@ if (is_admin()) {
 
 					$img_name = $_POST['img_name'];
 					$img_id = $_GET['img_id'];
-					$img_info = $_POST['img_info'] ? $_POST['img_info'] : '';
-					$img_map = $_POST['img_map'] ? $_POST['img_map'] : '';
+					$img_info = $_POST['img_info'] ?: '';
+					$img_map = $_POST['img_map'] ?: '';
 					
 					img_update($img_id, $img_name, $img_info, $img_map);
 
@@ -523,7 +523,7 @@ if (is_admin()) {
 
 					// Finally update linked images: first remove all images, then select proper images only
 					unset($_SESSION['current_lab'] -> images);
-					$_SESSION['current_lab'] -> images = array();
+					$_SESSION['current_lab'] -> images = [];
 					if (isset($_POST["images"])) {
 						foreach ($_POST["images"] as $img_id) {
 							$_SESSION['current_lab'] -> images[$img_id] = new Image(true, $img_id, '', '');

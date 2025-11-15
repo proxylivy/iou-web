@@ -19,16 +19,16 @@
 class Lab {
 	static $id;
 	public $folder_id;
-	public $netmap_ids = array();
-	public $netmap_hubs = array();
+	public $netmap_ids = [];
+	public $netmap_hubs = [];
 	public $name;
 	public $description;
 	public $info;
 	public $netmap;
 	public $time;
 	public $points;
-	public $devices = array();
-	public $images = array();
+	public $devices = [];
+	public $images = [];
 	public $diagram;
 
     /**
@@ -102,7 +102,7 @@ class Lab {
 		$this -> netmapDump();
 		
 		// Unset device array, if set
-		$this -> devices = array();
+		$this -> devices = [];
 		
 		try {
 			global $db;

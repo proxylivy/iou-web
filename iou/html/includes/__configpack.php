@@ -14,7 +14,7 @@
 class ConfigPack {
 	static $name;
 	public $folder_id;
-	public $configs = array();
+	public $configs = [];
 
     /**
      * Constructor which create a config pack

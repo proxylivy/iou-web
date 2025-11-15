@@ -73,7 +73,7 @@ switch ($action) {
  *************************************************************************/
 	case 'cfg_delete':
 		// Must be Admin and cfg_name numeric
-		if(is_admin() && isset($_GET['cfg_name']) && preg_match('/^[A-Za-z0-9_:+\\s-]+$/', $_GET['cfg_name'])) {
+		if (is_admin() && isset($_GET['cfg_name']) && preg_match('/^[A-Za-z0-9\s_-]+$/u', $_GET['cfg_name'])) {
 			$cfg_name = rawurldecode($_GET['cfg_name']);
 			if (cfg_delete($cfg_name)) {
 				$status = 'Informational';
@@ -96,7 +96,7 @@ switch ($action) {
 	case 'cfg_edit':
 		// Must be Admin, cfg_id numeric, cfg_name contains "A-Z, a-z, 0-9, _, :, +, - , ' '", and cfg_config setted.
 		if(is_admin() && isset($_POST['cfg_id']) && is_numeric($_POST['cfg_id']) &&
-			isset($_POST['cfg_name']) && preg_match('/^[A-Za-z0-9_:+\\s-]+$/', $_POST['cfg_name']) &&
+			isset($_POST['cfg_name']) && preg_match('/^[A-Za-z0-9\s_-]+$/u', $_POST['cfg_name']) &&
 			isset($_POST['cfg_config'])) {
 			$cfg_id = $_POST['cfg_id'];
 			$cfg_name = $_POST['cfg_name'];
@@ -263,7 +263,7 @@ switch ($action) {
 		$version_url = 'http://public.routereflector.com/iou-web/version';
 		$whatsnew_url = 'http://public.routereflector.com/iou-web/whatsnew';
 		if (PROXY != '') {
-			$aContext = array('http' => array('proxy' => 'tcp://'.PROXY, 'request_fulluri' => true));
+			$aContext = ['http' => ['proxy' => 'tcp://'.PROXY, 'request_fulluri' => true]];
 			$cxContext = stream_context_create($aContext);
 		}
 		if (isset($cxContext)) {
@@ -575,7 +575,7 @@ switch ($action) {
 	case 'folder_add':
 		// Must be Admin, folder_name contains only 'A-Z', 'a-z', '0-9', '-', '_', ' ' and folder_parent numeric
 		if(is_admin() && isset($_POST['folder_parent']) && is_numeric($_POST['folder_parent']) &&
-			isset($_POST['folder_name']) && preg_match('/^[A-Za-z0-9_-\\s]+$/', rawurldecode($_POST['folder_name']))) {
+			isset($_POST['folder_name']) && preg_match('/^[A-Za-z0-9\s_-]+$/u', rawurldecode($_POST['folder_name']))) {
 			if (folder_add(rawurldecode($_POST['folder_name']), $_POST['folder_parent'])) {
 				$status = 'Informational';
 				$message = 'Folder '.rawurldecode($_POST['folder_name']).' created.';
@@ -629,7 +629,7 @@ switch ($action) {
  *************************************************************************/
 	case 'folder_move':
 		// Must be Admin, src_obj contains only 'A-Z', 'a-z', '0-9', '_', ' ', '-' and folder_dst must be folderX (X is 0-9).
-		if(is_admin() && isset($_GET['src_obj']) && preg_match('/^[A-Za-z0-9 _+\\s]+$/', rawurldecode($_GET['src_obj'])) && isset($_GET['folder_dst']) && preg_match('/^folder[0-9]*$/', $_GET['folder_dst'])) {
+		if(is_admin() && isset($_GET['src_obj']) && preg_match('/^[A-Za-z0-9\s_-]+$/u', rawurldecode($_GET['src_obj'])) && isset($_GET['folder_dst']) && preg_match('/^folder[0-9]*$/', $_GET['folder_dst'])) {
 			$src_obj = rawurldecode($_GET['src_obj']);
 			$folder_dst = $_GET['folder_dst'];
 			folder_move($src_obj, $folder_dst);
@@ -653,7 +653,7 @@ switch ($action) {
     case 'clone_folder':
     // Must be Admin, folder_name contains only 'A-Z', 'a-z', '0-9', '-', '_', ' ' and folder_parent numeric
     if(is_admin() && isset($_POST['folder_id']) && is_numeric($_POST['folder_id']) &&
-        isset($_POST['new_folder_name']) && preg_match('/^[A-Za-z0-9_-\\s]+$/', rawurldecode($_POST['new_folder_name'])) &&
+        isset($_POST['new_folder_name']) && preg_match('/^[A-Za-z0-9\s_-]+$/u', rawurldecode($_POST['new_folder_name'])) &&
         isset($_POST['destination_folder_id'])  && is_numeric($_POST['destination_folder_id']) ) {
         if (folder_clone($_POST['folder_id'], rawurldecode($_POST['new_folder_name']), $_POST['destination_folder_id'] )) {
             $status = 'Informational';
@@ -750,7 +750,7 @@ switch ($action) {
 	case 'license_save':
 		// Must be admin and license must be set
 		if (is_admin() && isset($_POST['license_data'])) {
-			$license_data = $_POST['license_data'];
+			$license_data = urldecode($_POST['license_data']);
 			file_put_contents (BASE_BIN.'/iourc', $license_data);
 			$status = 'Informational';
 			$message = 'License saved.';

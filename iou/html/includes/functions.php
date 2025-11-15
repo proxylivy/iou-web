@@ -362,7 +362,7 @@ function file_delete($file_name) {
 function file_upload($ios_file, $ios_name, $ios_alias, $ios_error) {
 	// Check the uploaded file
 	if (!isset($ios_file) || $ios_file == '') {
-		$upload_errors = array( 
+		$upload_errors = [ 
 			UPLOAD_ERR_OK => 'No errors', 
 			UPLOAD_ERR_INI_SIZE => 'Larger than upload_max_filesize', 
 			UPLOAD_ERR_FORM_SIZE => 'Larger than form MAX_FILE_SIZE', 
@@ -372,7 +372,7 @@ function file_upload($ios_file, $ios_name, $ios_alias, $ios_error) {
 			UPLOAD_ERR_CANT_WRITE => 'Cannot write to disk', 
 			UPLOAD_ERR_EXTENSION => 'File upload stopped by extension', 
 			UPLOAD_ERR_EMPTY => 'File is empty.' // add this to avoid an offset 
-		);
+		];
 		error_log('FILE: upload failed with error '.$upload_errors[$ios_error].'.');
 		return false;
 	}
