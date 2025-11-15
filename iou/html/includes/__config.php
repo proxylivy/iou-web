@@ -12,9 +12,13 @@
 
 class Config {
 	static $id;
+    
 	public $config;
+    
 	public $name;
+    
 	public $pack;
+    
 	public $folder_id;
 	
     /**

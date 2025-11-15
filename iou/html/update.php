@@ -2,7 +2,7 @@
 $db = new PDO('sqlite:/opt/iou/data/database.sdb');
 $db->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
 
-if (php_sapi_name() == 'cli') {
+if (PHP_SAPI == 'cli') {
 	// Convert to 1.2.2 database version
 	try {
 		$db->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);

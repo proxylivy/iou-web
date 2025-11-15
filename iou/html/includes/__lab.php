@@ -18,17 +18,29 @@
  
 class Lab {
 	static $id;
+    
 	public $folder_id;
+    
 	public $netmap_ids = [];
+    
 	public $netmap_hubs = [];
+    
 	public $name;
+    
 	public $description;
+    
 	public $info;
+    
 	public $netmap;
+    
 	public $time;
+    
 	public $points;
+    
 	public $devices = [];
+    
 	public $images = [];
+    
 	public $diagram;
 
     /**
@@ -72,6 +84,7 @@ class Lab {
 			$this -> folder_id = $folder_id;
 		}
 	}
+    
     /**
      * Check if the sniffer is running
      * 
@@ -84,12 +97,14 @@ class Lab {
 			if ($pid == 0) {
 				return true;
 			}
+
             return false;
 		} catch (Exception $e) {
 			error_log('EXEC: failed to exec "'.$command.'".');
 			return false;
 		}
 	}
+    
     /**
      * Load all devices in a lab
      * 
@@ -112,6 +127,7 @@ class Lab {
 				$this -> devices[$netmap_id] -> lab_name = $this -> name;   // Needed in export config
 				$this -> devices[$netmap_id] -> folder_id = $this -> folder_id; // Needed in export config
 			}
+            
 			foreach ($this -> netmap_hubs as $netmap_id) {
 				// Putting hubs into an array
 				$this -> devices[$netmap_id] = new Device($this -> id, $netmap_id);
@@ -143,18 +159,21 @@ class Lab {
 				error_log('FILE: cannot create dir /tmp/iou.');
 				return false;
 			}
+            
 			chmod('/tmp/iou', 17901);
 			//error_log(fileperms('/tmp/iou'));
 			if (!file_exists('/tmp/iou/lab_'.$this -> id) && !mkdir('/tmp/iou/lab_'.$this -> id)) {
 				error_log('FILE: cannot create dir /tmp/iou/lab_'.$this -> id.'.');
 				return false;
 			}
+            
 			// Remove old NETMAP, if exists
 			$netmap_file = '/tmp/iou/lab_'.$this -> id.'/NETMAP';
 			if(file_exists($netmap_file) && !unlink($netmap_file)) {
 				error_log('FILE: cannot delete the file'.$netmap_file.'.');
 				return false;
 			}
+            
 			// Exporting to a file
 			try {
 				//See netmap.js.php also
@@ -162,7 +181,7 @@ class Lab {
 				$cleaned_netmap = preg_replace("/(^[\r\n]*|[\r\n]+)[\s\t]*[\r\n\']+/", "\n", $cleaned_netmap);	// Remove empty lines
 				$cleaned_netmap = preg_replace("/[\s]+\n/", "\n", $cleaned_netmap);								// Remove trailing spaces (trim lines)
 				$cleaned_netmap = trim($cleaned_netmap);														// Remove trailing spaces (trim all)
-				$cleaned_netmap = $cleaned_netmap."\n";															// Adding and end of line for ioulive86
+				$cleaned_netmap .= "\n";															// Adding and end of line for ioulive86
 				$fp = fopen($netmap_file, 'w');
 				fwrite($fp, $cleaned_netmap);
 				fclose($fp);
@@ -191,8 +210,10 @@ class Lab {
 			if (is_numeric($tok)) {
 				$this -> netmap_ids[$netmap_ids_index++] = $tok;
 			}
+            
 			$tok = strtok(": \n");
 		}
+        
 		sort($this -> netmap_ids);
 		$this -> netmap_ids = array_unique($this -> netmap_ids);
 		
@@ -202,7 +223,7 @@ class Lab {
 		$base_hub = BASE_HUB;
 		
 		// Per row analysis
-		foreach ($netmap_array as $key => $value) {
+		foreach ($netmap_array as $value) {
 				// How many devices?
 				$tok = strtok($value, " ");
 				$total = 0;
@@ -211,8 +232,10 @@ class Lab {
 						if (is_numeric(substr($tok, 0, 1))) {
 								$total++;
 						}
+                        
 						$tok = strtok(" ");
 				}
+                
 				if ($total > 2) {
 						$this -> netmap_hubs[$netmap_hubs_index] = $base_hub;
 						$base_hub++;
@@ -268,6 +291,7 @@ class Lab {
 			error_log('DB: cannot update the DB with error "'.$e->getMessage().'" (query was "'.$query.'".');
 		}
 	 }
+    
     /**
      * Start the sniffer
      * 
@@ -277,6 +301,7 @@ class Lab {
 	 	if ($this -> isSnifferRunning()) {
 			return true;
 		}
+
          $command = 'nohup sudo '.BASE_BIN.'/iousniff -n /tmp/iou/lab_'.$this -> id.'/NETMAP -s /opt/iou/data/Sniffer/ >> '.BASE_DIR.'/data/Logs/exec.txt 2>&1 &';
          try {
 				exec($command, $output, $pid);
@@ -286,6 +311,7 @@ class Lab {
 				return false;
 			}
 	 }
+     
     /**
      * Stop the sniffer
      * 
@@ -295,6 +321,7 @@ class Lab {
 	 	if (!$this -> isSnifferRunning()) {
 			return true;
 		}
+
          $command = 'sudo pkill iousniff';
          try {
 				exec($command, $output, $pid);

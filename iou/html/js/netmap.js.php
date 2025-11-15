@@ -9,7 +9,7 @@ header("Content-Type: application/javascript; charset=UTF-8");
 		$cleaned_netmap = preg_replace("/(^[\r\n]*|[\r\n]+)[\s\t]*[\r\n\']+/", "\n", $cleaned_netmap);	// Remove empty lines
 		$cleaned_netmap = preg_replace("/[\s]+\n/", "\n", $cleaned_netmap);								// Remove trailing spaces (trim lines)
 		$cleaned_netmap = trim($cleaned_netmap);														// Remove trailing spaces (trim all)
-		$cleaned_netmap = $cleaned_netmap."\n";															// Adding and end of line for ioulive86
+		$cleaned_netmap .= "\n";															// Adding and end of line for ioulive86
 		$netmap_array = explode("\n", preg_replace('/ [0-9]+\r/', '', $cleaned_netmap));
 		$base_hub = BASE_HUB;
 ?>
@@ -26,7 +26,7 @@ header("Content-Type: application/javascript; charset=UTF-8");
 		$currr_hub = $base_hub;
 		$index = 0;
 		// Print connections between devices
-		foreach ($netmap_array as $key => $value) {
+		foreach ($netmap_array as $value) {
 			$tok = strtok($value, " ");
 			$total = 0;
 			while ($tok != false) {
