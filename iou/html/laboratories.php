@@ -100,9 +100,10 @@ switch ($action) {
 			var img_id = $(this).closest('li').attr('id').replace(/img/g, '');
 			var img_name = $(this).closest('li').find('a').text();
 			var delete_url = '<?php print BASE_WWW ?>/ajax_helper.php?action=img_delete&img_id=' + img_id;
-			$('#dialog').attr('title', 'Confirm image deletion');
-			$('#dialog').html('Are you sure you want to delete <strong>' + img_name + '</strong> image?');
-			$('#dialog').dialog({
+			var dlg = $('#dialog');
+			dlg.attr('title', 'Confirm image deletion');
+			dlg.html('Are you sure you want to delete <strong>' + img_name + '</strong> image?');
+			dlg.dialog({
 				modal: true, 
 				show: 'fade', 
 				hide: 'fade',
@@ -111,13 +112,14 @@ switch ($action) {
 					Ok: function() {
 						$.get(delete_url);
 						$('#img' + img_id).fadeOut(1000);
+						var d = $(this);
 						setTimeout(function(){
-							$(this).dialog('destroy');
+							d.dialog('close');
 							location.reload();
 						}, 100);
 					},
 					Cancel: function() {
-						$(this).dialog('destroy');
+						$(this).dialog('close');
 					}
 				}
 			});
@@ -125,9 +127,10 @@ switch ($action) {
 		$('.cfg a.wipe').click(function() {
 			var cfg_name = $(this).closest('li').find('a').text();
 			var delete_url = '<?php print BASE_WWW ?>/ajax_helper.php?action=cfg_delete&cfg_name=' + encodeURIComponent(cfg_name);
-			$('#dialog').attr('title', 'Confirm config deletion');
-			$('#dialog').html('Are you sure you want to delete <strong>' + cfg_name + '</strong> config pack?');
-			$('#dialog').dialog({
+			var dlg = $('#dialog');
+			dlg.attr('title', 'Confirm config deletion');
+			dlg.html('Are you sure you want to delete <strong>' + cfg_name + '</strong> config pack?');
+			dlg.dialog({
 				modal: true, 
 				show: 'fade', 
 				hide: 'fade',
@@ -135,13 +138,14 @@ switch ($action) {
 				buttons: {
 					Ok: function() {
 						$.get(delete_url);
+						var d = $(this);
 						setTimeout(function(){
-							$(this).dialog('destroy');
+							d.dialog('close');
 							location.reload();
 						}, 100);
 					},
 					Cancel: function() {
-						$(this).dialog('destroy');
+						$(this).dialog('close');
 					}
 				}
 			});

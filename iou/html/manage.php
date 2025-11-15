@@ -19,8 +19,7 @@ if (is_admin()) {
 <script type='text/javascript'><!--
 	$(document).ready(
 		function() {
-			$('#db_wipe').on.('click',
-				function() {
+			$('#db_wipe').on('click', function() {
 					$('#dialog').attr('title', 'Confirm data loss');
 					$('#dialog').html('Are you sure you want to delete your database and <strong>loose</strong> all your data?');
 					$('#dialog').dialog({
