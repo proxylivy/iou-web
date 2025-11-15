@@ -901,7 +901,8 @@ function page_header($title) {
 	<script type='text/javascript' src='<?php print BASE_WWW ?>/js/jquery.contextmenu.js'></script>
 	<script type='text/javascript' src='<?php print BASE_WWW ?>/js/jquery.validate.js'></script>
 	<script type='text/javascript' src='<?php print BASE_WWW ?>/js/iou-web.js'></script>
-	<script type='text/javascript' src='<?php print BASE_WWW ?>/js/jquery.countdown.js'></script>
+	<script type='text/javascript' src='<?php print BASE_WWW ?>/js/jquery.plugin.min.js'></script>
+	<script type='text/javascript' src='<?php print BASE_WWW ?>/js/jquery.countdown.min.js'></script>
 	<link rel='stylesheet' type='text/css' href='<?php print BASE_WWW ?>/css/black-tie/jquery-ui.min.css' />
 	<link rel='stylesheet' type='text/css' href='<?php print BASE_WWW ?>/css/jquery.contextmenu.css' />
 	<link rel='stylesheet' type='text/css' href='<?php print BASE_WWW ?>/css/jquery.countdown.css' />

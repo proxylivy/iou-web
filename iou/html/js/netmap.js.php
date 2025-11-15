@@ -13,7 +13,7 @@ header("Content-Type: application/javascript; charset=UTF-8");
 		$netmap_array = explode("\n", preg_replace('/ [0-9]+\r/', '', $cleaned_netmap));
 		$base_hub = BASE_HUB;
 ?>
-	jsPlumb.bind("ready", function() {
+	jsPlumb.ready( function() {
 		jsPlumb.importDefaults({
 			Anchor : "Continuous",
 			//Connector : [ "Bezier", { curviness: 50 } ],

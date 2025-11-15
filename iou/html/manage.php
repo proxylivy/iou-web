@@ -19,7 +19,7 @@ if (is_admin()) {
 <script type='text/javascript'><!--
 	$(document).ready(
 		function() {
-			$('#db_wipe').click(
+			$('#db_wipe').on.('click',
 				function() {
 					$('#dialog').attr('title', 'Confirm data loss');
 					$('#dialog').html('Are you sure you want to delete your database and <strong>loose</strong> all your data?');
@@ -40,13 +40,11 @@ if (is_admin()) {
 					});
 				}
 			);
-			$('#db_optimize').click(
-				function() {
+			$('#db_optimize').on('click', function() {
 					optimizeDatabase('<?php print BASE_WWW ?>');
 				}
 			);
-			$('#license').click(
-				function() {
+			$('#license').on('click', function() {
 					var url = '<?php print BASE_WWW ?>/ajax_helper.php?action=license_save';
 					var license = '<?php print rawurlencode(file_get_contents(BASE_BIN.'/iourc')) ?>';
 					$('#dialog').attr('title', 'Manage license');
@@ -56,11 +54,11 @@ if (is_admin()) {
 						resizable: false,
 						buttons: {
 							'Save': function() {
-								$(this).dialog('destroy');
+								$(this).dialog('close');
 								$.post(url, {
 									license_data: $(this).find('.license_data').val()
 								});
-								$(this).dialog('destroy');
+								$(this).dialog('close');
 								$('#dialog').attr('title', 'Manage license');
 								$('#dialog').html("License saved.");
 								$( "#dialog" ).dialog({
@@ -68,14 +66,14 @@ if (is_admin()) {
 									resizable: false,
 									buttons: {
 										Ok: function() {
-											$(this).dialog('destroy');
+											$(this).dialog('close');
 											location.reload();
 										}
 									}
 								});
 							},
 							Cancel: function() {
-								$(this).dialog('destroy');
+								$(this).dialog('close');
 							}
 						}
 					});
@@ -366,7 +364,7 @@ if (is_admin()) {
 				},
 			}
 		});
-		$('img').click(function(e){
+		$('img').on('click', function(e){
 			var offset = $(this).parent().offset();
 			var position = $(this).position();
 			var y = (e.pageY - offset.top).toFixed(0);
@@ -1034,7 +1032,7 @@ if (is_admin()) {
 ?>
 <script type='text/javascript'><!--
 	$(document).ready(function() {
-		$('.file a.wipe').click(function() {
+		$('.file a.wipe').on('click', function() {
 			var file_name = $(this).closest('li').find('input').attr('value');
 			$('#dialog').attr('title', 'Confirm file deletion');
 			$('#dialog').html('Are you sure you want to delete <strong>' + file_name + '</strong> file?');
@@ -1153,7 +1151,7 @@ if (is_admin()) {
 <SCRIPT type="text/javascript">
 $(document).ready(function()
 {
-	$("#labs_all").click(function()				
+	$("#labs_all").on('click', function()				
 	{
 		var checked_status = this.checked;
 		$('.labs').each(function()
@@ -1161,7 +1159,7 @@ $(document).ready(function()
 			this.checked = checked_status;
 		});
 	});
-	$("#configs_all").click(function()				
+	$("#configs_all").on('click', function()				
 	{
 		var checked_status = this.checked;
 		$('.configs').each(function()
@@ -1311,7 +1309,7 @@ $(document).ready(function()
 <SCRIPT type="text/javascript">
 $(document).ready(function()
 {
-	$("#labs_all").click(function()				
+	$("#labs_all").on('click', function()				
 	{
 		var checked_status = this.checked;
 		$('.labs').each(function()
@@ -1319,7 +1317,7 @@ $(document).ready(function()
 			this.checked = checked_status;
 		});
 	});
-	$("#configs_all").click(function()				
+	$("#configs_all").on('click', function()				
 	{
 		var checked_status = this.checked;
 		$('.configs').each(function()
@@ -1338,7 +1336,9 @@ $(document).ready(function()
 <?php
 			$finfo = new finfo;
 			$fileinfo = $finfo->file($_FILES["import_file"]["tmp_name"], FILEINFO_MIME_TYPE);
-			if ($fileinfo == "application/x-gzip") {
+			// Aceptar múltiples tipos MIME para gzip
+			$valid_gzip_types = ['application/x-gzip', 'application/gzip', 'application/x-compressed', 'application/x-compress'];
+			if (in_array($fileinfo, $valid_gzip_types)) {
 		
 				$buffer_size = 4096; // read 4kb at a time
 				$file_tmp = BASE_DIR.'/data/Import/iou-web-import-'.date('YmdHis').'.db';

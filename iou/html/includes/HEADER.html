@@ -75,11 +75,12 @@
 						
 					},
 					'No, sniffer files only': function() {
-						$.get(clear_url + '&files=sniffer');
-						setTimeout(function(){
-							$(this).dialog('destroy');
-							location.reload();
-						}, 500);
+							$.get(clear_url + '&files=sniffer');
+							var dlg = $(this);
+							setTimeout(function(){
+								dlg.dialog('destroy');
+								location.reload();
+							}, 500);
 					}
 				}
 			});

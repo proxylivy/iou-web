@@ -151,32 +151,48 @@ function deviceSnapshot(base_www, dev_id) {
  * Create an auto-close window message                                   *
  *************************************************************************/
 function dialogAutoclose(dialog_title, dialog_message) {
-	$('#dialog').attr('title', dialog_title);
-	$('#dialog').html(dialog_message);
-	$('#dialog').dialog({
-		modal: true,
-		show: 'fade',
-		hide: 'fade',
-		resizable: false,
-	}, setTimeout(function(){$("#dialog").dialog("destroy");},2000));
+    var dlg = $('#dialog');
+
+    dlg.attr('title', dialog_title)
+       .html(dialog_message)
+       .dialog({
+           modal: true,
+           show: { effect: 'fade', duration: 150 },
+           hide: { effect: 'fade', duration: 150 },
+           resizable: false,
+           close: function() {
+               dlg.dialog('destroy').removeAttr('style').hide();
+           }
+       });
+
+    setTimeout(function() {
+        if (dlg.dialog('instance')) {
+            dlg.dialog('close');
+        }
+    }, 2000);
 }
 /*************************************************************************
  * Create an informational window message (OK only)                      *
  *************************************************************************/
 function dialogMessage(dialog_title, dialog_message) {
-	$('#dialog').attr('title', dialog_title);
-	$('#dialog').html(dialog_message);
-	$('#dialog').dialog({
-		modal: true,
-		show: 'fade',
-		hide: 'fade',
-		resizable: false,
-		buttons: {
-			Ok: function() {
-				$(this).dialog('destroy');
-			},
-		}
-	});
+    var dlg = $('#dialog');
+
+    dlg.attr('title', dialog_title)
+       .html(dialog_message)
+       .dialog({
+           modal: true,
+           show: { effect: 'fade', duration: 150 },
+           hide: { effect: 'fade', duration: 150 },
+           resizable: false,
+           buttons: {
+               Ok: function() {
+                   $(this).dialog('close');
+               }
+           },
+           close: function() {
+               dlg.dialog('destroy').removeAttr('style').hide().empty();
+           }
+       });
 }
 /*************************************************************************
  * Export device config                                                  *

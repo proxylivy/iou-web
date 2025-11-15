@@ -46,6 +46,7 @@ switch ($action) {
 			var folder_name = $(this).closest('li').find('a').text();
 			var folder_path = $(this).closest('li').find('.path').val();
 			var delete_url = '<?php print BASE_WWW ?>/ajax_helper.php?action=folder_delete&folder_id=' + folder_id;
+			var dlg = $(this);
 			$('#dialog').attr('title', 'Confirm folder deletion');
 			$('#dialog').html('Are you sure you want to delete <strong>' + folder_name + '</strong> folder?');
 			$('#dialog').dialog({
@@ -57,12 +58,12 @@ switch ($action) {
 					Ok: function() {
 						$.get(delete_url);
 						setTimeout(function(){
-							$(this).dialog('destroy');
+							dlg.dialog('close');
 							location.reload();
 						}, 100);
 					},
 					Cancel: function() {
-						$(this).dialog('destroy');
+						$(this).dialog('close');
 					}
 				}
 			});
@@ -71,23 +72,26 @@ switch ($action) {
 			var lab_id = $(this).closest('li').attr('id').replace(/lab/g, '');
 			var lab_name = $(this).closest('li').find('a').text();
 			var delete_url = '<?php print BASE_WWW ?>/ajax_helper.php?action=lab_delete&lab_id=' + lab_id;
-			$('#dialog').attr('title', 'Confirm lab deletion');
-			$('#dialog').html('Are you sure you want to delete <strong>' + lab_name + '</strong> lab?');
-			$('#dialog').dialog({
+			var dlg = $('#dialog');
+			dlg.attr('title', 'Confirm lab deletion');
+			dlg.html('Are you sure you want to delete <strong>' + lab_name + '</strong> lab?');
+			dlg.dialog({
 				modal: true, 
 				show: 'fade', 
 				hide: 'fade',
 				resizable: false,
 				buttons: {
 					Ok: function() {
+						var d = $(this);
 						$.get(delete_url);
 						setTimeout(function(){
-							$(this).dialog('destroy');
+							d.dialog('close');
 							location.reload();
 						}, 100);
 					},
 					Cancel: function() {
-						$(this).dialog('destroy');
+						var d = $(this);
+						d.dialog('close');
 					}
 				}
 			});
