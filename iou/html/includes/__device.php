@@ -120,14 +120,13 @@ class Device {
 		if ($this -> isCloud()){
 			// Don't need to export if Cloud, skipping
 			return true;
-		} else {
-			//Import running, if doesn't exist import startup and if it doesn't exist impost initial config.
-			$running_config = '/tmp/iou/lab_'.$this -> lab_id.'/dev_'.$this -> id.'/running-config';
-			$startup_config = '/tmp/iou/lab_'.$this -> lab_id.'/dev_'.$this -> id.'//startup-config';
-			//$initial_config = '/tmp/iou/lab_'.$this -> lab_id.'/dev_'.$this -> id.'/config-'.sprintf("%05d", $this -> id);
-			$name = $this -> lab_name.' - '.$this -> name;
-
-			if (file_exists($running_config)) {
+		}
+        //Import running, if doesn't exist import startup and if it doesn't exist impost initial config.
+        $running_config = '/tmp/iou/lab_'.$this -> lab_id.'/dev_'.$this -> id.'/running-config';
+        $startup_config = '/tmp/iou/lab_'.$this -> lab_id.'/dev_'.$this -> id.'//startup-config';
+        //$initial_config = '/tmp/iou/lab_'.$this -> lab_id.'/dev_'.$this -> id.'/config-'.sprintf("%05d", $this -> id);
+        $name = $this -> lab_name.' - '.$this -> name;
+        if (file_exists($running_config)) {
 				$import_file = $running_config;
 			} elseif (file_exists($startup_config)) {
 				$import_file = $startup_config;
@@ -135,16 +134,14 @@ class Device {
 				error_log('FILE: cannot find any config to export.');
 				return false;
 			}
-			
-			try {
+        try {
 				$fp = fopen($import_file, 'r');
 				$content = fread($fp, filesize($import_file));
 
 				if (cfg_add($name, $content, $this -> folder_id)) {
 					return true;
-				} else {
-					return false;
 				}
+            return false;
 				
 				fclose($fp);
 				return true;
@@ -152,7 +149,6 @@ class Device {
 				error_log('FILE: cannot export '.$import_file.' with error "'.$e.'".');
 				return false;
 			}
-		}
 	}
 	
     /**
@@ -163,9 +159,8 @@ class Device {
 	public function isCloud() {
 		if ($this -> picture == 'cloud') {
 			return true;
-		} else {
-			return false;
 		}
+        return false;
 	}
 	
     /**
@@ -189,9 +184,8 @@ class Device {
 
         if ($portgroup <= $eth - 1) {
                 return true;
-        } else {
-                return false;
         }
+        return false;
 	}
 	
     /**
@@ -215,9 +209,8 @@ class Device {
 				exec($command, $output, $pid);
 				if ($pid == 0) {
 					return true;
-				} else {
-					return false;
 				}
+                return false;
 			} catch (Exception $e) {
 				error_log('EXEC: failed to exec "'.$command.'".');
 				return false;
@@ -228,9 +221,8 @@ class Device {
 				exec($command, $output, $pid);
 				if ($pid == 0) {
 					return true;
-				} else {
-					return false;
 				}
+                return false;
 			} catch (Exception $e) {
 				error_log('EXEC: failed to exec "'.$command.'".');
 				return false;
@@ -246,8 +238,8 @@ class Device {
 	public function reset() {
 		if (!$this -> isRunning()) {
 			return true;
-		} else {
-			if (!$this -> isCloud()) {
+		}
+        if (!$this -> isCloud()) {
 				// Stop
 				$command = 'sudo kill -SIGHUP $(sudo fuser -n tcp '.$this -> console.' 2>&1 | awk \'{print $2}\')';
 				try {
@@ -261,7 +253,6 @@ class Device {
 				// Cloud device -> skip
 				return true;
 			}
-		}
 	}
 	
 	/**
@@ -368,22 +359,21 @@ class Device {
 		// Check if already running
 		if ($this -> isRunning()) {
 			return true;
-		} else {
-			// Preparing folders
-			if (!file_exists('/tmp/iou/lab_'.$this -> lab_id.'/dev_'.$this -> id) && !mkdir('/tmp/iou/lab_'.$this -> lab_id.'/dev_'.$this -> id)) {
+		}
+        // Preparing folders
+        if (!file_exists('/tmp/iou/lab_'.$this -> lab_id.'/dev_'.$this -> id) && !mkdir('/tmp/iou/lab_'.$this -> lab_id.'/dev_'.$this -> id)) {
 				mkdir('/tmp/iou/lab_'.$this -> lab_id.'/dev_'.$this -> id);
 				error_log('FILE: cannot create dir /tmp/iou/lab_'.$this -> lab_id.'/dev_'.$this -> id.'.');
 				return false;
 			}
-			// Linking NETMAP
-			$netmap = '/tmp/iou/lab_'.$this -> lab_id.'/dev_'.$this -> id.'/NETMAP';
-			if (!file_exists($netmap) && !symlink('../NETMAP', $netmap)) {
+        // Linking NETMAP
+        $netmap = '/tmp/iou/lab_'.$this -> lab_id.'/dev_'.$this -> id.'/NETMAP';
+        if (!file_exists($netmap) && !symlink('../NETMAP', $netmap)) {
 				error_log('FILE: cannot link ../NETMAP.');
 				return false;
 			}
-
-			// Now starting
-			if ($this -> isCloud()) {
+        // Now starting
+        if ($this -> isCloud()) {
 				// Check if device is a Cloud
 				if (!file_exists('/sys/class/net/'.$this -> ethernet.'/operstate')) {
 					// Ethernet not found
@@ -498,7 +488,6 @@ class Device {
 					return false;
 				}
 			}
-		}
 	}
 	
     /**
@@ -513,8 +502,8 @@ class Device {
 		}
 		if (!$this -> isRunning()) {
 			return true;
-		} else {
-			if ($this -> isCloud()) {
+		}
+        if ($this -> isCloud()) {
 				// Check if device is a Cloud
 				if (!file_exists('/sys/class/net/'.$this -> ethernet.'/operstate')) {
 					// Ethernet not found
@@ -539,7 +528,6 @@ class Device {
 					error_log('EXEC: failed to exec "'.$command.'".');
 				}
 			}
-		}
 	}
 }
 ?>
