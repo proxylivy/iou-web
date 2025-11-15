@@ -11,6 +11,7 @@
 
 class Bin {
 	static $filename;
+    
 	public $name;
 	
     /**

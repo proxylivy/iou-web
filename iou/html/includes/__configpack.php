@@ -13,7 +13,9 @@
 
 class ConfigPack {
 	static $name;
+    
 	public $folder_id;
+    
 	public $configs = [];
 
     /**

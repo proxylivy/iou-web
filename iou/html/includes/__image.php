@@ -11,10 +11,15 @@
 
 class Image {
 	static $id;
+    
 	public $name;
+    
 	public $info;
+    
 	public $content;
+    
 	public $folder_id;
+    
 	public $map;
 
     /**

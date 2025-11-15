@@ -12,8 +12,11 @@
 
 class Folder {
 	static $id;
+    
 	public $parent_id;
+    
 	public $name;
+    
 	public $path;
 	
     /**
@@ -56,6 +59,7 @@ class Folder {
 				$this -> name = $folder_name;
 			}
 		}
+        
 		$this -> path = $this -> getPath();
 	}
 	
@@ -68,6 +72,7 @@ class Folder {
 		if ($this -> id == 0) {
 			return '/';
 		}
+
         $parent_folder = New Folder(true, $this -> parent_id, '', '');
         return $parent_folder -> path.$this -> name.'/';
 	}
