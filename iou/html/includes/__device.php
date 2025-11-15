@@ -23,7 +23,7 @@ class Device {
 	private $lab_id;
 	public $folder_id;
 	public $lab_name;
-	private $files = array();
+	private $files = [];
 	static $id;
 	public $name;
 	public $bin_alias;
@@ -82,11 +82,11 @@ class Device {
 			$this -> l2keepalive = $result['dev_l2keepalive'];
 			$this -> watchdog = $result['dev_watchdog'];
 			$this -> console = BASE_PORT + $this -> id;
-			$this -> files = array(
+			$this -> files = [
 				'startup' => 'config-'.sprintf('%05d', $this -> id),
 				'nvram' => 'nvram_'.sprintf('%05d', $this -> id),
 				'vlan' => 'vlan.dat-'.sprintf('%05d', $this -> id),
-			);
+			];
 		} catch(PDOException $e) {
 			error_log('DB: cannot query the DB with error "'.$e->getMessage().'" (query was "'.$query.'".');
 		}

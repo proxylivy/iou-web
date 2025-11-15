@@ -82,7 +82,7 @@ if (is_admin() && CHECK_UPDATE && time() - $_SESSION['session_time_start'] >= 86
 if (!isset($GLOBAL['all_bins'])) {
 	try {
 		global $db;
-		$GLOBAL['all_bins'] = array();
+		$GLOBAL['all_bins'] = [];
 		
 		// Getting data from DB
 		$query = 'SELECT bin_filename, bin_name FROM bins ORDER BY bin_name COLLATE NOCASE ASC;';
@@ -105,7 +105,7 @@ if (!isset($GLOBAL['all_bins'])) {
 if (!isset($GLOBAL['all_configs'])) {
 	try {
 		global $db;
-		$GLOBAL['all_configs'] = array();
+		$GLOBAL['all_configs'] = [];
 		
 		// Getting data from DB
 		$query = 'SELECT cfg_id, cfg_name, folder_id FROM configs ORDER BY cfg_name COLLATE NOCASE ASC;';
@@ -125,7 +125,7 @@ if (!isset($GLOBAL['all_configs'])) {
 if (!isset($GLOBAL['all_configpacks'])) {
 	try {
 		global $db;
-		$GLOBAL['all_configpacks'] = array();
+		$GLOBAL['all_configpacks'] = [];
 		
 		// Getting data from DB
 		$query = 'SELECT DISTINCT RTRIM(REPLACE(cfg_name, LTRIM(cfg_name, \'1234567890qwertyuiopasdfghjklzxcvbnmQWERTYUIOPASDFGHJKLZXCVBNM _+\'), \'\')) cfg_name, folder_id FROM configs ORDER BY cfg_name COLLATE NOCASE ASC;';
@@ -171,7 +171,7 @@ if(isset($_GET['cfg_pack']) && preg_match('/^[A-Za-z0-9_:+\\s]+$/', rawurldecode
 if (!isset($GLOBAL['all_folders'])) {
 	try {
 		global $db;
-		$GLOBAL['all_folders'] = array();
+		$GLOBAL['all_folders'] = [];
 		
 		// Getting data from DB
 		$query = 'SELECT folder_id, folder_name, parent_id FROM folders ORDER BY folder_name COLLATE NOCASE ASC;';
@@ -214,7 +214,7 @@ if (!isset($_SESSION['current_folder'])) {
 if (!isset($GLOBAL['all_images'])) {
 	try {
 		global $db;
-		$GLOBAL['all_images'] = array();
+		$GLOBAL['all_images'] = [];
 		
 		// Getting data from DB
 		$query = 'SELECT img_id, img_name, folder_id FROM images ORDER BY img_name COLLATE NOCASE ASC;';
@@ -259,7 +259,7 @@ if(isset($_GET['img_id']) && is_numeric($_GET['img_id'])) {
 if (!isset($GLOBAL['all_labs'])) {
 	try {
 		global $db;
-		$GLOBAL['all_labs'] = array();
+		$GLOBAL['all_labs'] = [];
 		
 		// Getting data from DB
 		$query = 'SELECT lab_id, lab_name, lab_description, folder_id FROM labs ORDER BY lab_name COLLATE NOCASE ASC;';

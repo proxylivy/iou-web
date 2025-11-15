@@ -88,7 +88,7 @@
 .context-menu-theme-vista .context-menu-item .context-menu-item-inner {
 	padding:4px 16px 4px 35px;
 	margin-left:1px;
-	background-color:none;
+	background-color: transparent;
 	background-repeat:no-repeat;
 	background-position:3px center;
 	background-image:none;
@@ -106,7 +106,6 @@
 .context-menu-theme-osx {
 	background-color:white;
 	opacity: .93;
-	filter: alpha(opacity=93);
 	zoom:1.0;
 	border:1px solid #b2b2b2;
 }
@@ -118,7 +117,6 @@
 	font-weight:700;
 	font-size:12px;
 	opacity: 1.0;
-	filter: alpha(opacity=100);
 	z-index:1;
 }
 .context-menu-theme-osx .context-menu-separator {
@@ -132,7 +130,7 @@
 }
 .context-menu-theme-osx .context-menu-item .context-menu-item-inner {
 	padding:2px 10px 2px 22px;
-	background-color:none;
+	background-color: transparent;
 	background-repeat:no-repeat;
 	background-position:4px center;
 	background-image:none;
@@ -172,7 +170,7 @@
 .context-menu-theme-human .context-menu-item .context-menu-item-inner {
 	padding:4px 16px 4px 35px;
 	margin-left:0px;
-	background-color:none;
+	background-color: transparent;
 	background-repeat:no-repeat;
 	background-position:3px center;
 	background-image:none;
@@ -213,12 +211,12 @@
 	border-color:#000;
   	border-radius: 3px;
   	-webkit-border-radius: 3px;
-	-moz-border-radius: 3px;
+	border-radius: 3px;
 }
 .context-menu-theme-gloss .context-menu-item .context-menu-item-inner {
 	padding:4px 16px 4px 35px;
 	margin-left:0px;
-	background-color:none;
+	background-color: transparent;
 	background-repeat:no-repeat;
 	background-position:3px center;
 	background-image:none;
