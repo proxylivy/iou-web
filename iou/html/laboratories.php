@@ -622,7 +622,7 @@ $(function () {
 			}
 ?>
 </div>
-<script type='text/javascript' src='<?php print BASE_WWW ?>/js/jquery.jsPlumb-1.3.14-all-min.js'></script>
+<script type='text/javascript' src='<?php print BASE_WWW ?>/js/jquery.jsPlumb-1.4.1-all-min.js'></script>
 <script type='text/javascript' src='<?php print BASE_WWW ?>/js/netmap.js.php'></script>
 <script type='text/javascript'><!--
 	var base_www = '<?php print BASE_WWW ?>';

@@ -895,13 +895,14 @@ function page_header($title) {
 	</script>
 	<script type='text/javascript' src='<?php print BASE_WWW ?>/xinha/XinhaCore.js'></script>
 	<script type='text/javascript' src='<?php print BASE_WWW ?>/xinha/XinhaLoader.js'></script>
-	<script type='text/javascript' src='<?php print BASE_WWW ?>/js/jquery-1.8.2.min.js'></script>
-	<script type='text/javascript' src='<?php print BASE_WWW ?>/js/jquery-ui-1.8.24.custom.min.js'></script>
+	<script type='text/javascript' src='<?php print BASE_WWW ?>/js/jquery-3.7.1.min.js'></script>
+	<script type='text/javascript' src='<?php print BASE_WWW ?>/js/jquery-migrate-3.5.2.js'></script>
+	<script type='text/javascript' src='<?php print BASE_WWW ?>/js/jquery-ui.min.js'></script>
 	<script type='text/javascript' src='<?php print BASE_WWW ?>/js/jquery.contextmenu.js'></script>
 	<script type='text/javascript' src='<?php print BASE_WWW ?>/js/jquery.validate.js'></script>
 	<script type='text/javascript' src='<?php print BASE_WWW ?>/js/iou-web.js'></script>
 	<script type='text/javascript' src='<?php print BASE_WWW ?>/js/jquery.countdown.js'></script>
-	<link rel='stylesheet' type='text/css' href='<?php print BASE_WWW ?>/css/black-tie/jquery-ui-1.8.24.custom.css' />
+	<link rel='stylesheet' type='text/css' href='<?php print BASE_WWW ?>/css/black-tie/jquery-ui.min.css' />
 	<link rel='stylesheet' type='text/css' href='<?php print BASE_WWW ?>/css/jquery.contextmenu.css' />
 	<link rel='stylesheet' type='text/css' href='<?php print BASE_WWW ?>/css/jquery.countdown.css' />
 	<link rel='stylesheet' type='text/css' href='<?php print BASE_WWW ?>/css/iou-web.css' />
