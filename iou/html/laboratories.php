@@ -480,14 +480,14 @@ $(function () {
 				$nv_ram = $_SESSION['current_lab'] -> devices[$netmap_id] -> ram.'MB/'.$_SESSION['current_lab'] -> devices[$netmap_id] -> nvram.'KB';
 				$int = (4*$_SESSION['current_lab'] -> devices[$netmap_id] -> ethernet).'e/'.(4*$_SESSION['current_lab'] -> devices[$netmap_id] -> serial).'s';
 				if($_SESSION['current_lab'] -> devices[$netmap_id] -> l2keepalive) {
-					$l2keepalive = '<input type=\'checkbox\' checked disabled />';
+					$l2keepalive = "<input type='checkbox' checked disabled />";
 				} else {
-					$l2keepalive = '<input type=\'checkbox\' disabled />';
+					$l2keepalive = "<input type='checkbox' disabled />";
 				}
 				if($_SESSION['current_lab'] -> devices[$netmap_id] -> watchdog) {
-					$watchdog = '<input type=\'checkbox\' checked disabled />';
+					$watchdog = "<input type='checkbox' checked disabled />";
 				} else {
-					$watchdog = '<input type=\'checkbox\' disabled />';
+					$watchdog = "<input type='checkbox' disabled />";
 				}
 			}
 ?>
