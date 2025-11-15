@@ -56,8 +56,8 @@ class ConfigPack {
 			foreach ($this -> configs as $config) {
 				$config -> load();
 			}
-		} catch(PDOException $e) {
-			error_log('DB: cannot query the DB with error "'.$e->getMessage().'" (query was "'.$query.'".');
+		} catch(PDOException $pdoException) {
+			error_log('DB: cannot query the DB with error "'.$pdoException->getMessage().'" (query was "'.$query.'".');
 		}
     }
 }

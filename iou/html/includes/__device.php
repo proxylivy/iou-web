@@ -109,8 +109,8 @@ class Device {
 				'nvram' => 'nvram_'.sprintf('%05d', $this -> id),
 				'vlan' => 'vlan.dat-'.sprintf('%05d', $this -> id),
 			];
-		} catch(PDOException $e) {
-			error_log('DB: cannot query the DB with error "'.$e->getMessage().'" (query was "'.$query.'".');
+		} catch(PDOException $pdoException) {
+			error_log('DB: cannot query the DB with error "'.$pdoException->getMessage().'" (query was "'.$query.'".');
 		}
 	}
 
@@ -172,8 +172,8 @@ class Device {
 				
 				fclose($fp);
 				return true;
-			} catch (Exception $e) {
-				error_log('FILE: cannot export '.$import_file.' with error "'.$e.'".');
+			} catch (Exception $exception) {
+				error_log('FILE: cannot export '.$import_file.' with error "'.$exception.'".');
 				return false;
 			}
 	}
@@ -351,8 +351,8 @@ class Device {
 			$statement -> bindParam(':dev_l2keepalive', $this -> l2keepalive, PDO::PARAM_BOOL);
 			$statement -> bindParam(':dev_watchdog', $this -> watchdog, PDO::PARAM_BOOL);
 			$statement -> execute();
-		} catch(PDOException $e) {
-			error_log('DB: cannot update the DB with error "'.$e->getMessage().'" (query was "'.$query.'".');
+		} catch(PDOException $pdoException) {
+			error_log('DB: cannot update the DB with error "'.$pdoException->getMessage().'" (query was "'.$query.'".');
 		}
     }
 

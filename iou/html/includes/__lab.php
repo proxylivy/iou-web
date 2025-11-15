@@ -99,7 +99,7 @@ class Lab {
 			}
 
             return false;
-		} catch (Exception $e) {
+		} catch (Exception $exception) {
 			error_log('EXEC: failed to exec "'.$command.'".');
 			return false;
 		}
@@ -143,8 +143,8 @@ class Lab {
 			while ($result = $statement -> fetch(PDO::FETCH_ASSOC)) {
 				$this -> images[$result['img_id']] = new Image(true, $result['img_id'], '', '');
 			}
-		} catch(PDOException $e) {
-			error_log('DB: cannot query the DB with error "'.$e->getMessage().'" (query was "'.$query.'".');
+		} catch(PDOException $pdoException) {
+			error_log('DB: cannot query the DB with error "'.$pdoException->getMessage().'" (query was "'.$query.'".');
 		}
     }
 	
@@ -189,8 +189,8 @@ class Lab {
 				$command = 'dos2unix '.$netmap_file;
 				exec($command, $output, $pid);
 				return true;
-			} catch (Exception  $e){
-				error_log('FILE: cannot create NETMAP ('.$netmap_file.') with error "'.$e->getMessage().'".');
+			} catch (Exception  $exception){
+				error_log('FILE: cannot create NETMAP ('.$netmap_file.') with error "'.$exception->getMessage().'".');
 				return false;
 			}
 	 }
@@ -287,8 +287,8 @@ class Lab {
 			
 			// After saving, need to reload (if there are added or removed devices)
 			$this -> load();
-		} catch(PDOException $e) {
-			error_log('DB: cannot update the DB with error "'.$e->getMessage().'" (query was "'.$query.'".');
+		} catch(PDOException $pdoException) {
+			error_log('DB: cannot update the DB with error "'.$pdoException->getMessage().'" (query was "'.$query.'".');
 		}
 	 }
     
@@ -306,7 +306,7 @@ class Lab {
          try {
 				exec($command, $output, $pid);
 				return $this -> isSnifferRunning();
-			} catch (Exception $e) {
+			} catch (Exception $exception) {
 				error_log('EXEC: failed to exec "'.$command.'".');
 				return false;
 			}
@@ -326,7 +326,7 @@ class Lab {
          try {
 				exec($command, $output, $pid);
 				return !$this -> isSnifferRunning();
-			} catch (Exception $e) {
+			} catch (Exception $exception) {
 				error_log('EXEC: failed to exec "'.$command.'".');
 				return false;
 			}
