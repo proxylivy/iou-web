@@ -254,10 +254,5 @@
         <path>iconsets/Classic/ed_charmap.gif</path>
       </default>
     </icon>
-    <icon id="smartreplace">
-      <default type="simple">
-        <path>plugins/SmartReplace/img.gif</path>
-      </default>
-    </icon>
   </icons>
 </iconset>

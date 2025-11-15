@@ -969,7 +969,7 @@ Xinha.Config = function()
    *    null (default):  the mode of the document Xinha is in is used
    * @type Boolean|null
    */
-  this.browserQuirksMode = null;
+  this.browserQuirksMode = false;
 
   // URL-s
   this.imgURL = "images/";
