@@ -31,8 +31,8 @@ function cfg_add($cfg_name, $cfg_config, $folder_id) {
 		$statement -> bindParam(':folder_id', $folder_id, PDO::PARAM_INT);
 		$statement -> execute();
 		return true;
-	} catch(PDOException $e) {
-		error_log('DB: cannot update the DB with error "'.$e->getMessage().'" (query was "'.$query.'".');
+	} catch(PDOException $pdoException) {
+		error_log('DB: cannot update the DB with error "'.$pdoException->getMessage().'" (query was "'.$query.'".');
 		return false;
 	}
 }
@@ -49,8 +49,8 @@ function cfg_delete($cfg_name) {
 		$statement = $db -> prepare($query);
 		$statement -> execute();
 		return true;
-	} catch(PDOException $e) {
-		error_log('DB: cannot update the DB with error "'.$e->getMessage().'" (query was "'.$query.'".');
+	} catch(PDOException $pdoException) {
+		error_log('DB: cannot update the DB with error "'.$pdoException->getMessage().'" (query was "'.$query.'".');
 		return false;
 	}
 }
@@ -69,8 +69,8 @@ function cfg_update($cfg_id, $cfg_name, $cfg_config) {
 		$statement -> bindParam(':cfg_name', $cfg_name, PDO::PARAM_STR);
 		$statement -> bindParam(':cfg_config', $cfg_config, PDO::PARAM_LOB);
 		$statement -> execute();
-	} catch(PDOException $e) {
-		msg_error("Cannot query the DB: ".$e->getMessage());
+	} catch(PDOException $pdoException) {
+		msg_error("Cannot query the DB: ".$pdoException->getMessage());
 		return;
 	}
 }
@@ -82,8 +82,8 @@ function cfg_update($cfg_id, $cfg_name, $cfg_config) {
 function database_backup() {
 	// Daily backup
 	$today = date("Ymd");
-	if (!file_exists(DATABASE."-$today")) {
-		if (copy(DATABASE, DATABASE."-$today")) {
+	if (!file_exists(DATABASE.('-' . $today))) {
+		if (copy(DATABASE, DATABASE.('-' . $today))) {
 			return true;
 		}
         error_log('DB: failed to backup the database.');
@@ -103,7 +103,7 @@ function database_backup() {
 	// Delete older backup file
 	$counter = count($files)-1;
 	while ($counter >= BCK_RETENTION) {
-		if (unlink(BASE_DIR."/data/$files[$counter]")) {
+		if (unlink(BASE_DIR.('/data/' . $files[$counter]))) {
 			return true;
 		}
         error_log('DB: failed to delete old backup file '.BASE_DIR.'/data/'.$files[$counter]);
@@ -149,8 +149,8 @@ function database_init($database) {
 		$statement = $db -> prepare($query);
 		$statement -> execute();
 		return true;
-	} catch (PDOException $e) {
-		error_log('DB: cannot create the DB with error "'.$e->getMessage().'" (query was "'.$query.'".');
+	} catch (PDOException $pdoException) {
+		error_log('DB: cannot create the DB with error "'.$pdoException->getMessage().'" (query was "'.$query.'".');
 		return false;
 	}
 }
@@ -197,8 +197,8 @@ function database_optimize($database) {
 			error_log('DB: cannot optimize the DB with error "'.$e->getMessage().'" (query was "'.$query_nested.'".');
 			return false;
 		}
-	} catch (PDOException $e) {
-		error_log('DB: cannot optimize the DB with error "'.$e->getMessage().'" (query was "'.$query.'".');
+	} catch (PDOException $pdoException) {
+		error_log('DB: cannot optimize the DB with error "'.$pdoException->getMessage().'" (query was "'.$query.'".');
 		return false;
 	}
 	try {
@@ -231,8 +231,8 @@ function database_optimize($database) {
 			error_log('DB: cannot optimize the DB with error "'.$e->getMessage().'" (query was "'.$query_nested.'".');
 			return false;
 		}
-	} catch (PDOException $e) {
-		error_log('DB: cannot optimize the DB with error "'.$e->getMessage().'" (query was "'.$query.'".');
+	} catch (PDOException $pdoException) {
+		error_log('DB: cannot optimize the DB with error "'.$pdoException->getMessage().'" (query was "'.$query.'".');
 		return false;
 	}
 	try {
@@ -265,8 +265,8 @@ function database_optimize($database) {
 			error_log('DB: cannot optimize the DB with error "'.$e->getMessage().'" (query was "'.$query_nested.'".');
 			return false;
 		}
-	} catch (PDOException $e) {
-		error_log('DB: cannot optimize the DB with error "'.$e->getMessage().'" (query was "'.$query.'".');
+	} catch (PDOException $pdoException) {
+		error_log('DB: cannot optimize the DB with error "'.$pdoException->getMessage().'" (query was "'.$query.'".');
 		return false;
 	}
 	try {
@@ -275,8 +275,8 @@ function database_optimize($database) {
 		$statement = $db -> prepare($query);
 		$statement -> execute();
 		return true;
-	} catch (PDOException $e) {
-		error_log('DB: cannot compress the DB with error "'.$e->getMessage().'" (query was "'.$query.'".');
+	} catch (PDOException $pdoException) {
+		error_log('DB: cannot compress the DB with error "'.$pdoException->getMessage().'" (query was "'.$query.'".');
 		return false;
 	}
 }
@@ -292,35 +292,35 @@ function database_update($database) {
 		$query = 'ALTER TABLE devices ADD COLUMN dev_delay INTEGER DEFAULT 0;';
 		$statement = $db -> prepare($query);
 		$statement -> execute();
-	} catch (Exception $e) {
+	} catch (Exception $exception) {
 		// Do nothing
 	}
 	try {
 		$query = 'ALTER TABLE images ADD COLUMN img_map TEXT;';
 		$statement = $db -> prepare($query);
 		$statement -> execute();
-	} catch (Exception $e) {
+	} catch (Exception $exception) {
 		// Do nothing
 	}
 	try {
 		$query = 'ALTER TABLE labs ADD COLUMN lab_diagram BOOL DEFAULT 1;';
 		$statement = $db -> prepare($query);
 		$statement -> execute();
-	} catch (Exception $e) {
+	} catch (Exception $exception) {
 		// Do nothing
 	}
 	try {
 		$query = 'ALTER TABLE labs ADD COLUMN lab_points INTEGER DEFAULT 0;';
 		$statement = $db -> prepare($query);
 		$statement -> execute();
-	} catch (Exception $e) {
+	} catch (Exception $exception) {
 		// Do nothing
 	}
 	try {
 		$query = 'ALTER TABLE labs ADD COLUMN lab_time INTEGER DEFAULT 0;';
 		$statement = $db -> prepare($query);
 		$statement -> execute();
-	} catch (Exception $e) {
+	} catch (Exception $exception) {
 		// Do nothing
 	}
 }
@@ -343,8 +343,8 @@ function file_delete($file_name) {
 		$statement -> bindParam(':file_name', $file_name, PDO::PARAM_STR);
 		$statement -> execute();
 		return true;
-	} catch (PDOException $e) {
-		error_log('DB: cannot delete file with error "'.$e->getMessage().'" (query was "'.$query.'".');
+	} catch (PDOException $pdoException) {
+		error_log('DB: cannot delete file with error "'.$pdoException->getMessage().'" (query was "'.$query.'".');
 		return false;
 	}
 }
@@ -405,9 +405,9 @@ function file_upload($ios_file, $ios_name, $ios_alias, $ios_error) {
 		$statement -> bindParam(':alias', $ios_alias, PDO::PARAM_STR);
 		$statement -> execute();
 		return true;
-	} catch(PDOException $e) {
-		error_log('DB: cannot update the DB with error "'.$e->getMessage().'".');
-		unlink(BASE_BIN."/$ios_name");
+	} catch(PDOException $pdoException) {
+		error_log('DB: cannot update the DB with error "'.$pdoException->getMessage().'".');
+		unlink(BASE_BIN.('/' . $ios_name));
 		return;
 	}
 }
@@ -426,8 +426,8 @@ function folder_add($folder_name, $parent_id) {
 		$statement -> bindParam(':parent_id', $parent_id, PDO::PARAM_INT);
 		$statement -> execute();
 		return true;
-	} catch (PDOException $e) {
-		error_log('DB: cannot add folder with error "'.$e->getMessage().'" (query was "'.$query.'".');
+	} catch (PDOException $pdoException) {
+		error_log('DB: cannot add folder with error "'.$pdoException->getMessage().'" (query was "'.$query.'".');
 		return false;
 	}
 }
@@ -466,8 +466,8 @@ function folder_delete($folder_id, $parent_id) {
 		$statement -> execute();
 		$db -> commit();
 		return true;
-	} catch (PDOException $e) {
-		error_log('DB: cannot delete folder with error "'.$e->getMessage().'" (query was "'.$query.'".');
+	} catch (PDOException $pdoException) {
+		error_log('DB: cannot delete folder with error "'.$pdoException->getMessage().'" (query was "'.$query.'".');
 		return false;
 	}
 }
@@ -565,8 +565,8 @@ function getLastConfigId() {
         // No config found, return 0
         return 0;
 		return $result['last'];
-	} catch (PDOException $e) {
-		error_log('DB: cannot select last cfg_id with error "'.$e->getMessage().'" (query was "'.$query.'".');
+	} catch (PDOException $pdoException) {
+		error_log('DB: cannot select last cfg_id with error "'.$pdoException->getMessage().'" (query was "'.$query.'".');
 		return false;
 	}
 }
@@ -588,8 +588,8 @@ function getLastImageId() {
 		}
         // No image found, return 0
         return 0;
-	} catch (PDOException $e) {
-		error_log('DB: cannot select last img_id with error "'.$e->getMessage().'" (query was "'.$query.'".');
+	} catch (PDOException $pdoException) {
+		error_log('DB: cannot select last img_id with error "'.$pdoException->getMessage().'" (query was "'.$query.'".');
 		return false;
 	}
 }
@@ -611,8 +611,8 @@ function getLastLabId() {
 		}
         // No lab found, return 0
         return 0;
-	} catch (PDOException $e) {
-		error_log('DB: cannot select last lab_id with error "'.$e->getMessage().'" (query was "'.$query.'".');
+	} catch (PDOException $pdoException) {
+		error_log('DB: cannot select last lab_id with error "'.$pdoException->getMessage().'" (query was "'.$query.'".');
 		return false;
 	}
 }
@@ -672,8 +672,8 @@ function export($labs, $configs, $file_export) {
 		$query = "DETACH 'export_db';";	
 		$statement = $db -> prepare($query);
 		$statement -> execute();
-	} catch (PDOException $e) {
-		error_log('DB: cannot export data with error "'.$e->getMessage().'" (query was "'.$query.'".');
+	} catch (PDOException $pdoException) {
+		error_log('DB: cannot export data with error "'.$pdoException->getMessage().'" (query was "'.$query.'".');
 		return false;
 	}
 	
@@ -690,8 +690,8 @@ function export($labs, $configs, $file_export) {
 		gzwrite($fp, file_get_contents($file_tmp));
 		gzclose($fp);
 		return true;
-	} catch (Exception  $e){
-		error_log('DB: cannot compress the database with error "'.$e->getMessage().'".');
+	} catch (Exception  $exception){
+		error_log('DB: cannot compress the database with error "'.$exception->getMessage().'".');
 		return false;
 	}
 }
@@ -713,8 +713,8 @@ function img_add($img_name, $img_info, $img_content, $folder_id) {
 		$statement -> bindParam(':folder_id', $folder_id, PDO::PARAM_INT);
 		$statement -> execute();
 		return true;
-	} catch(PDOException $e) {
-		error_log('DB: cannot update the DB with error "'.$e->getMessage().'" (query was "'.$query.'".');
+	} catch(PDOException $pdoException) {
+		error_log('DB: cannot update the DB with error "'.$pdoException->getMessage().'" (query was "'.$query.'".');
 		return false;
 	}
 }
@@ -739,8 +739,8 @@ function img_delete($img_id) {
 		$statement -> bindParam(':img_id', $img_id, PDO::PARAM_INT);
 		$statement -> execute();
 		return true;
-	} catch (PDOException $e) {
-		error_log('DB: cannot delete image with error "'.$e->getMessage().'" (query was "'.$query.'".');
+	} catch (PDOException $pdoException) {
+		error_log('DB: cannot delete image with error "'.$pdoException->getMessage().'" (query was "'.$query.'".');
 		return false;
 	}
 }
@@ -765,8 +765,8 @@ function img_update($img_id, $img_name, $img_info, $img_map) {
 		$statement -> bindParam(':img_map', $img_map, PDO::PARAM_STR);
 		$statement -> execute();
 		return true;
-	} catch (PDOException $e) {
-		error_log('DB: cannot delete image with error "'.$e->getMessage().'" (query was "'.$query.'".');
+	} catch (PDOException $pdoException) {
+		error_log('DB: cannot delete image with error "'.$pdoException->getMessage().'" (query was "'.$query.'".');
 		return false;
 	}
 }
@@ -787,8 +787,8 @@ function img_print($img_id) {
 		$statement -> execute();
 		$result = $statement -> fetch();
 		return $result['img_content'];
-	} catch (PDOException $e) {
-		error_log('DB: cannot delete image with error "'.$e->getMessage().'" (query was "'.$query.'".');
+	} catch (PDOException $pdoException) {
+		error_log('DB: cannot delete image with error "'.$pdoException->getMessage().'" (query was "'.$query.'".');
 		return false;
 	}
 }
@@ -822,8 +822,8 @@ function lab_add($name, $description, $info, $netmap) {
 		$statement -> execute();
 		return $db -> lastInsertId();
 	
-	} catch(PDOException $e) {
-		msg_error("Cannot query the DB: ".$e->getMessage());
+	} catch(PDOException $pdoException) {
+		msg_error("Cannot query the DB: ".$pdoException->getMessage());
 		return;
 	}
 }
@@ -852,8 +852,8 @@ function lab_delete($lab_id) {
 		$statement -> bindParam(':lab_id', $lab_id, PDO::PARAM_INT);
 		$statement -> execute();
 		return true;
-	} catch (PDOException $e) {
-		error_log('DB: cannot delete lab with error "'.$e->getMessage().'" (query was "'.$query.'".');
+	} catch (PDOException $pdoException) {
+		error_log('DB: cannot delete lab with error "'.$pdoException->getMessage().'" (query was "'.$query.'".');
 		return false;
 	}
 }

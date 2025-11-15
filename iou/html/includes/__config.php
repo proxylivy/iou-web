@@ -82,8 +82,8 @@ class Config {
 
 			// Setting data to this object
 			$this -> config = $result['cfg_config'];
-		} catch(PDOException $e) {
-			error_log('DB: cannot query the DB with error "'.$e->getMessage().'" (query was "'.$query.'".');
+		} catch(PDOException $pdoException) {
+			error_log('DB: cannot query the DB with error "'.$pdoException->getMessage().'" (query was "'.$query.'".');
 		}
     }
 }
