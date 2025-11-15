@@ -1421,7 +1421,7 @@ $(document).ready(function()
 						<TD colspan='2'><STRONG>Select all initial config packs</STRONG></TD>
 					</TR>
 <?php
-				$query = 'SELECT DISTINCT RTRIM(REPLACE(cfg_name, LTRIM(cfg_name, \'1234567890qwertyuiopasdfghjklzxcvbnmQWERTYUIOPASDFGHJKLZXCVBNM _+\'), \'\')) cfg_name, folder_id FROM configs ORDER BY cfg_name COLLATE NOCASE ASC';
+				$query = "SELECT DISTINCT RTRIM(REPLACE(cfg_name, LTRIM(cfg_name, '1234567890qwertyuiopasdfghjklzxcvbnmQWERTYUIOPASDFGHJKLZXCVBNM _+'), '')) cfg_name, folder_id FROM configs ORDER BY cfg_name COLLATE NOCASE ASC";
 				$statement = $imported_db -> prepare($query);
 				$statement -> execute();
 				

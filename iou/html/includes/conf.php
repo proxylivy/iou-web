@@ -31,14 +31,17 @@ if (!defined('TIMEZONE')) define('TIMEZONE', 'Europe/Rome');
 if (!defined('BASE_DIR')) define('BASE_DIR', '/opt/iou');
 
 if (!defined('BASE_WWW')) define('BASE_WWW', '');
+
 			// Change if you need custom url/port: 'http://192.168.72.130:81/iou'
 if (!defined('BASE_PORT')) define('BASE_PORT', '2000');
+
 			// Change if you need different TELNET port.
 if (!defined('BCK_RETENTION')) define('BCK_RETENTION', '10');
 
 if (!defined('CHECK_UPDATE')) define('CHECK_UPDATE', false);
 
 if (!defined('PROXY')) define('PROXY', '');
+
 				// Change to IP:port (i.e. '192.168.0.1:3128')
 if (!defined('UPDATE_INTERVAL')) define('UPDATE_INTERVAL', '2');	// Seconds between check device status
 
@@ -136,7 +139,7 @@ if (!isset($GLOBAL['all_configpacks'])) {
 		$GLOBAL['all_configpacks'] = [];
 
 		// Getting data from DB
-		$query = 'SELECT DISTINCT RTRIM(REPLACE(cfg_name, LTRIM(cfg_name, \'1234567890qwertyuiopasdfghjklzxcvbnmQWERTYUIOPASDFGHJKLZXCVBNM _+\'), \'\')) cfg_name, folder_id FROM configs ORDER BY cfg_name COLLATE NOCASE ASC;';
+		$query = "SELECT DISTINCT RTRIM(REPLACE(cfg_name, LTRIM(cfg_name, '1234567890qwertyuiopasdfghjklzxcvbnmQWERTYUIOPASDFGHJKLZXCVBNM _+'), '')) cfg_name, folder_id FROM configs ORDER BY cfg_name COLLATE NOCASE ASC;";
 		$statement = $db -> prepare($query);
 		$statement -> execute();
 
