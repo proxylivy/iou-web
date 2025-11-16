@@ -224,6 +224,28 @@ if (is_admin()) {
 				// Fill the form
 				page_header('Manage');
 ?>
+<script type='text/javascript'>
+  _editor_url  = '<?php print BASE_WWW ?>/xinha/';
+  _editor_lang = 'en';
+  _editor_skin = 'silva';
+  _editor_icons = 'Classic';
+</script>
+<script type='text/javascript' src='/xinha/XinhaCore.js'></script>
+<script type='text/javascript' src='/xinha/XinhaLoader.js'></script>
+<script type='text/javascript' src='/xinha/XinhaEasy.js'></script>
+<script type='text/javascript'>
+  xinha_editors = ['lab_info'];
+  xinha_init    = null;
+  xinha_config  = null;
+  xinha_plugins = [];
+  
+  xinha_init = xinha_init ? xinha_init : function() {
+    xinha_config = new Xinha.Config();
+    xinha_editors = Xinha.makeEditors(xinha_editors, xinha_config, xinha_plugins);
+    Xinha.startEditors(xinha_editors);
+  }
+  Xinha._addEvent(window, 'load', xinha_init);
+</script>
 <script type='text/javascript'><!--
 	$.validator.addMethod(
 		'regexp',
@@ -564,6 +586,29 @@ if (is_admin()) {
 				if(isset($_SESSION['current_lab'])) {
 					page_header('Manage');
 ?>
+<script type='text/javascript'>
+  _editor_url  = '<?php print BASE_WWW ?>/xinha/';
+  _editor_lang = 'en';
+  _editor_skin = 'silva';
+  _editor_icons = 'Classic';
+</script>
+<script type='text/javascript' src='<?php print BASE_WWW ?>/xinha/XinhaCore.js'></script>
+<script type='text/javascript' src='<?php print BASE_WWW ?>/xinha/XinhaLoader.js'></script>
+
+<script type='text/javascript'>
+  xinha_editors = ['lab_info'];
+  xinha_init    = null;
+  xinha_config  = null;
+  xinha_plugins = [];
+  
+  xinha_init = xinha_init ? xinha_init : function() {
+    xinha_config = new Xinha.Config();
+    xinha_editors = Xinha.makeEditors(xinha_editors, xinha_config, xinha_plugins);
+    Xinha.startEditors(xinha_editors);
+  }
+  
+  Xinha._addEvent(window, 'load', xinha_init);
+</script>
 <script type='text/javascript'><!--
 	$.validator.addMethod(
 		'regexp',
