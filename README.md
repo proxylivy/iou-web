@@ -20,7 +20,7 @@ Updates
 - Updated [Xinha](https://github.com/sleemanj/xinha) from `0.96` to `1.5.6`
 - jQuery Update from `1.8.2` to `3.7.1`
 	- jsPlumb from `1.3.14` to `1.4.1`
-	- jQuery.validate from some 2012 version to `1.21.0`
+	- jQuery.validate from `1.10.0` to `1.21.0`
 	- jQuery.countdown from `1.6.1` to `2.1.0`
 
 Supported Environment
