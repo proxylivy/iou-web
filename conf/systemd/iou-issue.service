@@ -1,0 +1,12 @@
+[Unit]
+Description=Generate /etc/issue once network is up enough
+After=network-pre.target
+Before=network-online.target
+Before=getty@tty1.service
+
+[Service]
+Type=oneshot
+ExecStart=/opt/iou/scripts/update-issue.sh
+
+[Install]
+WantedBy=multi-user.target

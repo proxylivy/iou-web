@@ -205,6 +205,7 @@ if (is_admin()) {
 					$_SESSION['current_lab'] -> diagram = isset($_POST['lab_diagram']) ? true : false;
 					$_SESSION['current_lab'] -> time = $_POST['lab_time'];
 					$_SESSION['current_lab'] -> points = $_POST['lab_points'];
+					$_SESSION['current_lab'] -> info = isset($_POST['lab_info']) ? $_POST['lab_info'] : '';
 					$_SESSION['current_lab'] -> save();
 					$_SESSION['current_lab'] -> load();
 					header("Cache-Control: no-cache, must-revalidate");	// HTTP/1.1
@@ -230,9 +231,9 @@ if (is_admin()) {
   _editor_skin = 'silva';
   _editor_icons = 'Classic';
 </script>
-<script type='text/javascript' src='/xinha/XinhaCore.js'></script>
-<script type='text/javascript' src='/xinha/XinhaLoader.js'></script>
-<script type='text/javascript' src='/xinha/XinhaEasy.js'></script>
+<script type='text/javascript' src='<?php print BASE_WWW ?>/xinha/XinhaCore.js'></script>
+<script type='text/javascript' src='<?php print BASE_WWW ?>/xinha/XinhaLoader.js'></script>
+<script type='text/javascript' src='<?php print BASE_WWW ?>/xinha/XinhaEasy.js'></script>
 <script type='text/javascript'>
   xinha_editors = ['lab_info'];
   xinha_init    = null;
@@ -594,7 +595,7 @@ if (is_admin()) {
 </script>
 <script type='text/javascript' src='<?php print BASE_WWW ?>/xinha/XinhaCore.js'></script>
 <script type='text/javascript' src='<?php print BASE_WWW ?>/xinha/XinhaLoader.js'></script>
-
+<script type='text/javascript' src='<?php print BASE_WWW ?>/xinha/XinhaEasy.js'></script>
 <script type='text/javascript'>
   xinha_editors = ['lab_info'];
   xinha_init    = null;

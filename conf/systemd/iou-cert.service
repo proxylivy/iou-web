@@ -1,0 +1,10 @@
+[Unit]
+Description=Generate IOU-WEB local SSL certificates
+Before=httpd.service
+
+[Service]
+Type=oneshot
+ExecStart=/opt/iou/scripts/gen-cert.sh
+
+[Install]
+WantedBy=multi-user.target

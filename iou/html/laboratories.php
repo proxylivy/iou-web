@@ -46,7 +46,6 @@ switch ($action) {
 			var folder_name = $(this).closest('li').find('a').text();
 			var folder_path = $(this).closest('li').find('.path').val();
 			var delete_url = '<?php print BASE_WWW ?>/ajax_helper.php?action=folder_delete&folder_id=' + folder_id;
-			var dlg = $(this);
 			$('#dialog').attr('title', 'Confirm folder deletion');
 			$('#dialog').html('Are you sure you want to delete <strong>' + folder_name + '</strong> folder?');
 			$('#dialog').dialog({
@@ -57,6 +56,7 @@ switch ($action) {
 				buttons: {
 					Ok: function() {
 						$.get(delete_url);
+						var dlg = $(this);
 						setTimeout(function(){
 							dlg.dialog('close');
 							location.reload();

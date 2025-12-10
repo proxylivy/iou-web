@@ -157,8 +157,8 @@ function dialogAutoclose(dialog_title, dialog_message) {
        .html(dialog_message)
        .dialog({
            modal: true,
-           show: { effect: 'fade', duration: 150 },
-           hide: { effect: 'fade', duration: 150 },
+           show: { effect: 'fade', duration: 80 },
+           hide: { effect: 'fade', duration: 70 },
            resizable: false,
            close: function() {
                dlg.dialog('destroy').removeAttr('style').hide();
@@ -181,8 +181,8 @@ function dialogMessage(dialog_title, dialog_message) {
        .html(dialog_message)
        .dialog({
            modal: true,
-           show: { effect: 'fade', duration: 150 },
-           hide: { effect: 'fade', duration: 150 },
+           show: { effect: 'fade', duration: 80 },
+           hide: { effect: 'fade', duration: 70 },
            resizable: false,
            buttons: {
                Ok: function() {
