@@ -1,12 +1,20 @@
-Defaults:apache runas_default=root, !requiretty, setenv, umask_override, umask=0002
+Defaults:apache !requiretty
+Defaults:apache !use_pty
+Defaults:apache !authenticate
+Defaults:apache runas_default=root
+Defaults:apache setenv
+Defaults:apache umask_override
+Defaults:apache umask=0002
+
 apache ALL=(root) NOPASSWD: /opt/iou/bin/*
+apache ALL=(root) NOPASSWD: /opt/iou/scripts/*
+
 apache ALL=(root) NOPASSWD: /sbin/ifconfig
 apache ALL=(root) NOPASSWD: /usr/bin/pkill
+apache ALL=(root) NOPASSWD: /bin/kill
+apache ALL=(root) NOPASSWD: /sbin/fuser
+apache ALL=(root) NOPASSWD: /bin/fuser
+
 apache ALL=(root) NOPASSWD: /bin/rm
 apache ALL=(root) NOPASSWD: /usr/sbin/apachectl
-apache ALL=(root) NOPASSWD: /sbin/fuser
-apache ALL=(root) NOPASSWD: /bin/kill
 apache ALL=(root) NOPASSWD: /sbin/reboot
-
-# Ubuntu has different path
-apache ALL=(root) NOPASSWD: /bin/fuser
