@@ -456,7 +456,7 @@ $(function () {
 		}
 ?>
 						<a href='#'><img border='0' class='action' id='cfg_snapshot_all' width='20' height='20' src='<?php print BASE_WWW ?>/images/buttons/snapshot.png' title='Make a snapshot of all devices' alt='Make a snapshot of all devices' /></a>
-						<a href='#'><img border='0' class='action' id='cfg_revert_all' width='20' height='20' src='<?php print BASE_WWW ?>/images/buttons/revert.png' title='Stop and revert to snapsot all devices' alt='Stop and revert to snapsot all devices' /></a>
+						<a href='#'><img border='0' class='action' id='cfg_revert_all' width='20' height='20' src='<?php print BASE_WWW ?>/images/buttons/revert.png' title='Stop and revert to snapshot all devices' alt='Stop and revert to snapshot all devices' /></a>
 						<a href='#'><img border='0' class='action' id='cfg_clean_all' width='20' height='20' src='<?php print BASE_WWW ?>/images/buttons/wipe.png' title='Stop all devices and wipe all configurations' alt='Stop all devices and wipe all configurations' /></a>
 						<a href='#'><img border='0' class='action' id='sniffer_start' width='20' height='20' src='<?php print BASE_WWW ?>/images/buttons/wireshark_start.png' title='Start sniffer' alt='Start sniffer' /></a>
 						<a href='#'><img border='0' class='action' id='sniffer_stop' width='20' height='20' src='<?php print BASE_WWW ?>/images/buttons/wireshark_stop.png' title='Stop sniffer' alt='Stop sniffer' /></a>
