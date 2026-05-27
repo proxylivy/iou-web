@@ -153,7 +153,7 @@ switch ($action) {
 		$('#addFolder').click(function() {
 			var folder_parent = '<?php print $_SESSION['current_folder'] -> id ?>';
 			var add_url = '<?php print BASE_WWW ?>/ajax_helper.php?action=folder_add';
-			$('#dialog').attr('title', 'Add folder <a href="http://www.routereflector.com/cisco/cisco-iou-web-interface/laboratories/#folder_add" target="_blank"><img class="help" border="0" src="<?php print BASE_WWW ?>/images/buttons/help_small.png" width="16" height="16" title="Online Help" alt="Online Help" /></a>');
+			$('#dialog').attr('title', 'Add folder');
 			$('#dialog').html("<script type='text/javascript'>$.validator.addMethod('regexp',function(value, element, regexp) {var check = false;return this.optional(element) || regexp.test(value);},'Please check your input and use only allowed characters.');$(document).ready(function(){$('form').validate({rules: {folder_name: {required: true,regexp: /^[A-Za-z0-9_ -]+$/}}});});</script><form><p><label for='folder_name'>Folder name*:<br/><small>(A-Za-z0-9_ -)</small></label><input id='folder_name' type='text' name='folder_name' /></p></form>");
 			$('#dialog').dialog({
 				modal: true,
