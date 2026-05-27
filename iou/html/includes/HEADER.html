@@ -43,7 +43,7 @@
 </div>
 <script type='text/javascript'><!--
 	$(document).ready(function() {
-		$('#clearFiles').click(function() {
+		$('#clearFiles').on('click', function() {
 			var clear_url = '/ajax_helper.php?action=clear';
 			$('#dialog').attr('title', 'Confirm deletion');
 			$('#dialog').html('Are you sure you want to clear session and delete sniffer/import/export files?<br/>A "Yes" will <strong>delete</strong> all temporary/configs files and will <strong>reboot</strong> the VM.<br/>A "No" will delete sniffer files only (<strong>suggested</strong>).');

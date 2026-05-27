@@ -41,7 +41,7 @@ switch ($action) {
 				$(ui.draggable).fadeOut(1000);
 			}
 		});
-		$('.folder a.wipe').click(function() {
+		$('.folder a.wipe').on('click', function() {
 			var folder_id = $(this).closest('li').attr('id').replace(/folder/g, '');
 			var folder_name = $(this).closest('li').find('a').text();
 			var folder_path = $(this).closest('li').find('.path').val();
@@ -68,7 +68,7 @@ switch ($action) {
 				}
 			});
 		});
-		$('.lab a.wipe').click(function() {
+		$('.lab a.wipe').on('click', function() {
 			var lab_id = $(this).closest('li').attr('id').replace(/lab/g, '');
 			var lab_name = $(this).closest('li').find('a').text();
 			var delete_url = '<?php print BASE_WWW ?>/ajax_helper.php?action=lab_delete&lab_id=' + lab_id;
@@ -96,7 +96,7 @@ switch ($action) {
 				}
 			});
 		});
-		$('.img a.wipe').click(function() {
+		$('.img a.wipe').on('click', function() {
 			var img_id = $(this).closest('li').attr('id').replace(/img/g, '');
 			var img_name = $(this).closest('li').find('a').text();
 			var delete_url = '<?php print BASE_WWW ?>/ajax_helper.php?action=img_delete&img_id=' + img_id;
@@ -124,7 +124,7 @@ switch ($action) {
 				}
 			});
 		});
-		$('.cfg a.wipe').click(function() {
+		$('.cfg a.wipe').on('click', function() {
 			var cfg_name = $(this).closest('li').find('a').text();
 			var delete_url = '<?php print BASE_WWW ?>/ajax_helper.php?action=cfg_delete&cfg_name=' + encodeURIComponent(cfg_name);
 			var dlg = $('#dialog');
@@ -150,7 +150,7 @@ switch ($action) {
 				}
 			});
 		});
-		$('#addFolder').click(function() {
+		$('#addFolder').on('click', function() {
 			var folder_parent = '<?php print $_SESSION['current_folder'] -> id ?>';
 			var add_url = '<?php print BASE_WWW ?>/ajax_helper.php?action=folder_add';
 			$('#dialog').attr('title', 'Add folder');
@@ -334,10 +334,10 @@ switch ($action) {
 		
 		setInterval("updateDeviceStatus('<?php print BASE_WWW ?>', '<?php print $_SESSION['current_lab'] -> id ?>')", <?php print UPDATE_INTERVAL*1000 ?>);
 		$('.solutions').hide();
-		$('.help').click(function() {
+		$('.help').on('click', function() {
 			$(this).next('.solutions').slideToggle();
 		});
-		$('.action').click(function() {
+		$('.action').on('click', function() {
 			var base_www = '<?php print BASE_WWW ?>';
 			var lab_id = '<?php print $_SESSION['current_lab'] -> id ?>';
 			var action = $(this).attr('id').split('_')[0] + '_' + $(this).attr('id').split('_')[1];
@@ -819,7 +819,7 @@ $(function () {
 		if(is_admin()) {
 ?>
 
-		$('a.wipe').click(function() {
+		$('a.wipe').on('click', function() {
 			var cfg_name = $(this).closest('a').find('input').val();
 			var delete_url = '<?php print BASE_WWW ?>/ajax_helper.php?action=cfg_delete&cfg_name=' + encodeURIComponent(cfg_name);
 			$('#dialog').attr('title', 'Confirm config deletion');
