@@ -30,3 +30,8 @@ with Apache 2.4 and PHP-FPM 7.4.33. Maybe will work on any other distro
 PHP 8.x support is outside the scope of this project and will require a very large refactor.
 
 I will happy see a PR to fix any problem
+
+# Disclaimer
+
+This project is a web interface only. It does not include, distribute, or endorse any Cisco IOS binaries or intellectual property. IOU (IOS on Unix) binaries are proprietary software owned by Cisco Systems and are not part of this repository.
+Running Cisco IOS images may require a valid Cisco license. This project is provided AS-IS for educational and lab purposes only. The maintainers are not affiliated with Cisco Systems in any way.
