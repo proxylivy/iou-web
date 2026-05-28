@@ -1,35 +1,32 @@
 # IOU WEB
 
-This repository is a modernised fork of IOU WEB, originally created by Andrea Dainese ([@dainok](https://github.com/dainok)) and licensed under GNU GPL v2.0.
-All derivative work remains under GPL v2.0.
+A modernised fork of [IOU WEB](https://github.com/dainok/iou-web) by Andrea Dainese ([@dainok](https://github.com/dainok)), licensed under GNU GPL v2.0.
 
-Upstream: https://github.com/dainok/iou-web
+The original version was heavily tied to old distributions (CentOS 6 32 bits and Old Debian), outdated PHP (5.3), and legacy libraries, turning deployment into an archaeological exercise with undocumented workarounds. This fork makes it usable again on "modern" without rewriting it from scratch.
 
-This fork focuses on maintainability, security, and compatibility with modern systems, while preserving full functionality of the original IOU WEB platform.
+> [!NOTE]
+> If you are starting fresh and don't specifically need IOU WEB, please, use any other modern network emulation instead.
 
-Changes includes:
-- Cleaner and modular folder structure
+Features
+- Cleaner folder structure
+- Refactores from `5.3.3` to `5.6.40` code using Rector, making it compatible with PHP 7.4
+- Deprecated Shellinabox web console
 - Updated dependencies
-- Deprecated Shellinabox
-- Improved UI/UX consistency and standards-mode rendering
-- Default Apache Hardening (force HTTPS, CSP, and directory Rules)
-- Simplified installation process
 
-Updates
-- Refactor PHP using [Rector](https://github.com/rectorphp/rector) for better readibility and compatibility. From `5.3.3` to `5.6.40` that can work in PHP `7.4` (Weird, isn't?)
+Updated Dependencies
 - Updated [Xinha](https://github.com/sleemanj/xinha) from `0.96` to `1.5.6`
-- jQuery Update from `1.8.2` to `3.7.1`
-	- jsPlumb from `1.3.14` to `1.4.1`
-	- jQuery.validate from `1.10.0` to `1.21.0`
-	- jQuery.countdown from `1.6.1` to `2.1.0`
+- [jQuery](https://jquery.com/) Update from `1.8.2` to `3.7.1`
+- jsPlumb from `1.3.14` to `1.4.1` (Broken dependency)
+- jQuery.validate from `1.10.0` to `1.21.0`
+- jQuery.countdown from `1.6.1` to `2.1.0`
 
-Supported Environment
-Well, i tested on
+Tested on
+- CentOS 7
 - Rocky Linux 8.10
-- Apache 2.4.37-x
-- PHP-FPM 7.4.33-x
+- Rocky Linux 9.7
 
-So, its should work on any modern system that can run apache >= 2.4.x and PHP 7.4.33
+with Apache 2.4 and PHP-FPM 7.4.33. Maybe will work on any other distro
 
-Notice:
-- PHP 8.0 is NOT compatible with php 5.6 code, so you need to make a large and mayor refactor in this repo, i am not going to do that, but you are welcome to a PR, i dont have any problem if work
+PHP 8.x support is outside the scope of this project and will require a very large refactor.
+
+I will happy see a PR to fix any problem
